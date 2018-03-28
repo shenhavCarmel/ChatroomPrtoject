@@ -1,0 +1,7 @@
+C:\Users\Win10\source\repos\ChatRoomProject\MileStone1\bin\Debug\MileStone1.exe.config
+C:\Users\Win10\source\repos\ChatRoomProject\MileStone1\bin\Debug\MileStone1.exe
+C:\Users\Win10\source\repos\ChatRoomProject\MileStone1\bin\Debug\MileStone1.pdb
+C:\Users\Win10\source\repos\ChatRoomProject\MileStone1\obj\Debug\MileStone1.csprojResolveAssemblyReference.cache
+C:\Users\Win10\source\repos\ChatRoomProject\MileStone1\obj\Debug\MileStone1.csproj.CoreCompileInputs.cache
+C:\Users\Win10\source\repos\ChatRoomProject\MileStone1\obj\Debug\MileStone1.exe
+C:\Users\Win10\source\repos\ChatRoomProject\MileStone1\obj\Debug\MileStone1.pdb
