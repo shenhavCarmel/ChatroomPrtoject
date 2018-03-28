@@ -10,7 +10,7 @@ namespace MileStone1
     {
         static void Main(string[] args)
         {
-            PresentationLayer.GUI start = new PresentationLayer.GUI();
+            PresentationLayer.GUI start = new PresentationLayer.GUI(); 
         }
     }
 }
