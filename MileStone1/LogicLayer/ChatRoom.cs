@@ -15,11 +15,13 @@ namespace MileStone1.LogicLayer
         private User _loggedInUser;
         private const String _URL= "http://ise172.ise.bgu.ac.il:80";
         private List<Message> _messages;
+        private List<User> _users;
 
         // constructor
         private ChatRoom()
         {
-            _messages = new List<Message>();
+            _messages = new List<Message>(); // TODO: change to uploading from files
+            _users = new List<User>(); // TODO: change to uploading from files
         }
 
         public static ChatRoom Instance
@@ -35,41 +37,50 @@ namespace MileStone1.LogicLayer
             }
         }
 
-        public Boolean Login(String nickname, int groupId)
+        public Boolean Login(String nickname, string groupId)
         {
-            Boolean loginPass = false;
-            User userLoggedIn = new User(nickname, groupId);
+            User userToLogin = new User(nickname, groupId);
 
-            // TODO: check if the user exists by groupId and nickname (in files?)- loginPass = true
-
-            if (loginPass)
+            if (CheckIfUserExists(userToLogin))
             {
                 // change state of user
-                User.Login();
+                userToLogin.Login();
 
                 // connect him to the chat room
-                this._loggedInUser = userLoggedIn;
+                this._loggedInUser = userToLogin;
+
+                return true;
             }
-           
-            return loginPass;
+            else
+                return false;
         }
 
-        public Boolean Register(String nickname, int groupId)
+        public Boolean Register(String nickname, string groupId)
         {
-            Boolean registerPass = false;
+            User userToLogin = new User(nickname, groupId);
 
-            // TODO: check if the user doesn't exist by nickname (in files?)- registerPass = true
-
-            if (registerPass)
+            if (!CheckIfUserExists(userToLogin))
             {
+                _users.Add(userToLogin);
                 // TODO: register him to the chat room --> add to files
-                
-                return Login(nickname, groupId);
+                return true;
             }
-            return registerPass;
+            else
+                return false;
         }
 
-        public Message[] RetrieveMsg()
+        private Boolean CheckIfUserExists(User user)
+        {
+            // go over users list and check if the requested user exists
+            foreach (User currUser in _users)
+            {
+                if (currUser.Equals(user))
+                    return true;
+            }
+            return false;
+        }
+
+        public void RetrieveMsg()
         {
             List<IMessage> retrievedMsg = Communication.Instance.GetTenMessages(_URL);
 
@@ -82,13 +93,13 @@ namespace MileStone1.LogicLayer
             // add new messages from the server to the list of messages
             foreach (IMessage currMsg in arrRetrievedMsg)
             {
-                if (!_messages.Contains(currMsg))
+                if (!_messages.Contains((Message)currMsg))
                 {
                     _messages.Add((Message)currMsg);
                 }
-            } 
+            }
 
-            return (Message[])arrRetrievedMsg;
+            // TODO: write on files the new nessages - ConsistentLayer.saveMessages(arrRetrievedMsg)
         }
 
         public List<Message> DisplayLastMsg()
@@ -107,19 +118,41 @@ namespace MileStone1.LogicLayer
             }
         }
 
-        public List<Message> DisplayMsgByUser(User sender)
+        public List<Message> DisplayMsgByUser(string nickname, string groupId)
         {
-            // collect nessages from a specific user
-            IEnumerable<Message> results =
-                 _messages.Where(currMsg => currMsg.getGroupID == sender.getGroupID() &&
-                                            currMsg.getUserName == sender.getUserName());
-            return (List<Message>)results;
+            User sender = new User(nickname, groupId);
+
+            if (CheckIfUserExists(sender))
+            {
+                // collect messages from a specific user
+                IEnumerable<Message> results =
+                     _messages.Where(currMsg => (currMsg.GetGroupID()).Equals(sender.GetGroupId()) &&
+                                                (currMsg.GetUserName()).Equals(sender.GetNickname()));
+                return (List<Message>)results;
+            }
+            else
+                throw new ArgumentException("Error - user isn't registered to chatroom");
+            
         }
 
-        public void sendMessage(String msg)
+        public string SendMessage(String body)
         {
-            // TODO: deal with the returned value of the sending nsg to server action
-            _loggedInUser.sendMessage(msg);
+            try
+            {
+                Message newMsg = new Message(body, _loggedInUser);
+                IMessage sentMsg = _loggedInUser.SendMessage(body, _URL);
+
+                newMsg.SetDate(sentMsg.Date);
+                newMsg.SetGuid(sentMsg.Id);
+
+                return "Message sent successfully";
+            }
+            catch (Exception excep)
+            {
+                return excep.Message;
+            }
+
+            
         }
 
         public void Logout()
