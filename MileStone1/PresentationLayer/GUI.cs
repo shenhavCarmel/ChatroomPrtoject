@@ -37,6 +37,7 @@ namespace MileStone1.PresentationLayer
             AnalayzeInput(Console.ReadLine());
         }
 
+
         private void AnalayzeInput(string action)
         {
             switch (action)

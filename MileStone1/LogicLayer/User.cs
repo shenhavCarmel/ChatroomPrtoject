@@ -9,7 +9,6 @@ namespace MileStone1.LogicLayer
 {
     class User
     {
-
         private Boolean _isLoggedIn;
         private String _nickname;
         private string _groupId;
