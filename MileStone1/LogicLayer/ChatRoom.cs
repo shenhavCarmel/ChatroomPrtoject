@@ -66,7 +66,6 @@ namespace MileStone1.LogicLayer
                 
                 return Login(nickname, groupId);
             }
-
             return registerPass;
         }
 
