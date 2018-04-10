@@ -7,7 +7,7 @@ using MileStoneClient.CommunicationLayer;
 
 namespace MileStone1.LogicLayer
 {
-
+    [Serializable]
     class Message
     {
         private string _messageContent;
@@ -16,6 +16,21 @@ namespace MileStone1.LogicLayer
         private string _groupID;
         private string _userName;
 
+        public Message(IMessage msgToCopy)
+        {
+            if (msgToCopy.MessageContent.Length <= 150)
+            {
+                this._messageContent = msgToCopy.MessageContent;
+                this._groupID = msgToCopy.GroupID;
+                this._userName = msgToCopy.UserName;
+                this._ID = msgToCopy.Id;
+                this._timeStamp = msgToCopy.Date;
+            }
+            else
+            {
+                throw new ArgumentException("Message content over 150 characters");
+            }
+        }
 
         public Message(string body, User user)
         {
@@ -25,7 +40,21 @@ namespace MileStone1.LogicLayer
                 this._groupID = user.GetGroupId();
                 this._userName = user.GetNickname();
 
-
+                public Message(IMessage msgToCopy)
+        {
+            if (msgToCopy.MessageContent.Length <= 150)
+            {
+                this._messageContent = msgToCopy.MessageContent;
+                this._groupID = msgToCopy.GroupID;
+                this._userName = msgToCopy.UserName;
+                this._ID = msgToCopy.Id;
+                this._timeStamp = msgToCopy.Date;
+            }
+            else
+            {
+                throw new ArgumentException("Message content over 150 characters");
+            }
+        }
             }
             else
             {
