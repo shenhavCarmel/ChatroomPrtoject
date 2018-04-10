@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MileStone1.CommunicationLayer;
+using MileStoneClient.CommunicationLayer;
 
 namespace MileStone1.LogicLayer
 {
@@ -31,14 +31,12 @@ namespace MileStone1.LogicLayer
             _isLoggedIn = true;
         }
 
-        public IMessage SendMessage(string body, String URL)
+        public Message SendMessage(string body, String URL)
         {
-            return CommunicationLayer.Communication.Instance.Send(URL, _groupId, _nickname, body);
-        }
-       
-        private void SaveToPresistent()
-        {
-            
+            IMessage sentMsg = Communication.Instance.Send(URL, _groupId, _nickname, body);
+
+            // return the IMessage converted to message
+            return new Message(sentMsg);
         }
 
         public String GetNickname()
