@@ -27,8 +27,10 @@ namespace MileStone1.LogicLayer
             _userHandler = new UserHandler();
 
             // load users' and messages' data from files
-            _messages = _msgHandler.GetMessagesList();
-            _registeredUsers = _msgHandler.GetUsersList();
+            //_messages = _msgHandler.GetMessagesList();
+            _messages = new List<Message>();
+            //_registeredUsers = _msgHandler.GetUsersList();
+            _registeredUsers = new List<User>();
 
             _loggedInUser = null;
         }
@@ -73,7 +75,7 @@ namespace MileStone1.LogicLayer
                 _registeredUsers.Add(userToRegister);
 
                 // register him to the chat room --> add to files
-                _userHandler.SaveUser(userToRegister);
+                //_userHandler.SaveUser(userToRegister);
 
                 return true;
             }
@@ -106,16 +108,15 @@ namespace MileStone1.LogicLayer
             // add new messages from the server to the list of messages
             foreach (IMessage currMsg in arrRetrievedMsg)
             {
-                if (!_messages.Contains((Message)currMsg))
+                // check if the list of messages already contains message with the same guid
+                if(!_messages.Exists(e => e.GetId().Equals(currMsg.Id)))
                 {
-                    _messages.Add((Message)currMsg);
-
-                }
+                    _messages.Add(new Message(currMsg));
+                }          
             }
 
             // add to presistent
-            _msgHandler.SaveMessageList(_messages);
-
+            //_msgHandler.SaveMessageList(_messages);
         }
 
         public List<Message> DisplayLastMsg()
@@ -155,15 +156,11 @@ namespace MileStone1.LogicLayer
         {
             try
             {
-                Message newMsg = new Message(body, _loggedInUser);
-                IMessage sentMsg = _loggedInUser.SendMessage(body, _URL);
-
-
-                newMsg.SetDate(sentMsg.Date);
-                newMsg.SetGuid(sentMsg.Id);
+                // send message content to server through user, save the returned object message
+                Message newSentMessage = _loggedInUser.SendMessage(body, _URL);
 
                 // save to persistent 
-                _msgHandler.SaveMessage(newMsg);
+                _msgHandler.SaveMessage(newSentMessage);
 
                 return "Message sent successfully";
             }
@@ -171,8 +168,6 @@ namespace MileStone1.LogicLayer
             {
                 return excep.Message;
             }
-
-
         }
 
         public void Logout()
