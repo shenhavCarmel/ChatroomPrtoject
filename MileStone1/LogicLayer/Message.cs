@@ -39,29 +39,12 @@ namespace MileStone1.LogicLayer
                 this._messageContent = body;
                 this._groupID = user.GetGroupId();
                 this._userName = user.GetNickname();
-
-                public Message(IMessage msgToCopy)
-        {
-            if (msgToCopy.MessageContent.Length <= 150)
-            {
-                this._messageContent = msgToCopy.MessageContent;
-                this._groupID = msgToCopy.GroupID;
-                this._userName = msgToCopy.UserName;
-                this._ID = msgToCopy.Id;
-                this._timeStamp = msgToCopy.Date;
             }
             else
             {
                 throw new ArgumentException("Message content over 150 characters");
             }
         }
-            }
-            else
-            {
-                throw new ArgumentException("Message content over 150 characters");
-            }
-        }
-
 
         public String GetMessageContent()
         {
@@ -102,10 +85,6 @@ namespace MileStone1.LogicLayer
         {
             this._timeStamp = dateTime;
         }
-
-
-
-
 
         public void SetGuid(Guid id)
         {
