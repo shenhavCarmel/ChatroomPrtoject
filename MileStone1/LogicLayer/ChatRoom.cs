@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MileStone1.CommunicationLayer;
+using MileStoneClient.CommunicationLayer;
+using MileStone1.ConsistentLayer;
 
 namespace MileStone1.LogicLayer
 {
@@ -13,15 +14,23 @@ namespace MileStone1.LogicLayer
         // fields
         private static ChatRoom _instance = null;
         private User _loggedInUser;
-        private const String _URL= "http://ise172.ise.bgu.ac.il:80";
+        private const String _URL = "http://ise172.ise.bgu.ac.il:80";
         private List<Message> _messages;
-        private List<User> _users;
+        private List<User> _registeredUsers;
+        private MessageHandler _msgHandler;
+        private UserHandler _userHandler;
 
         // constructor
         private ChatRoom()
         {
-            _messages = new List<Message>(); // TODO: change to uploading from files
-            _users = new List<User>(); // TODO: change to uploading from files
+            _msgHandler = new MessageHandler();
+            _userHandler = new UserHandler();
+
+            // load users' and messages' data from files
+            _messages = _msgHandler.GetMessagesList();
+            _registeredUsers = _msgHandler.GetUsersList();
+
+            _loggedInUser = null;
         }
 
         public static ChatRoom Instance
@@ -57,12 +66,15 @@ namespace MileStone1.LogicLayer
 
         public Boolean Register(String nickname, string groupId)
         {
-            User userToLogin = new User(nickname, groupId);
+            User userToRegister = new User(nickname, groupId);
 
-            if (!CheckIfUserExists(userToLogin))
+            if (!CheckIfUserExists(userToRegister))
             {
-                _users.Add(userToLogin);
-                // TODO: register him to the chat room --> add to files
+                _registeredUsers.Add(userToRegister);
+
+                // register him to the chat room --> add to files
+                _userHandler.SaveUser(userToRegister);
+
                 return true;
             }
             else
@@ -72,9 +84,10 @@ namespace MileStone1.LogicLayer
         private Boolean CheckIfUserExists(User user)
         {
             // go over users list and check if the requested user exists
-            foreach (User currUser in _users)
+            foreach (User currUser in _registeredUsers)
             {
-                if (currUser.Equals(user))
+                if ((currUser.GetNickname()).Equals(user.GetNickname()) &&
+                    (currUser.GetGroupId()).Equals(user.GetGroupId()))
                     return true;
             }
             return false;
@@ -96,10 +109,13 @@ namespace MileStone1.LogicLayer
                 if (!_messages.Contains((Message)currMsg))
                 {
                     _messages.Add((Message)currMsg);
+
                 }
             }
 
-            // TODO: write on files the new nessages - ConsistentLayer.saveMessages(arrRetrievedMsg)
+            // add to presistent
+            _msgHandler.SaveMessageList(_messages);
+
         }
 
         public List<Message> DisplayLastMsg()
@@ -132,7 +148,7 @@ namespace MileStone1.LogicLayer
             }
             else
                 throw new ArgumentException("Error - user isn't registered to chatroom");
-            
+
         }
 
         public string SendMessage(String body)
@@ -142,8 +158,12 @@ namespace MileStone1.LogicLayer
                 Message newMsg = new Message(body, _loggedInUser);
                 IMessage sentMsg = _loggedInUser.SendMessage(body, _URL);
 
+
                 newMsg.SetDate(sentMsg.Date);
                 newMsg.SetGuid(sentMsg.Id);
+
+                // save to persistent 
+                _msgHandler.SaveMessage(newMsg);
 
                 return "Message sent successfully";
             }
@@ -152,7 +172,7 @@ namespace MileStone1.LogicLayer
                 return excep.Message;
             }
 
-            
+
         }
 
         public void Logout()

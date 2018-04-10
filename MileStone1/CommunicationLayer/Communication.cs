@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MileStone1.CommunicationLayer
+namespace MileStoneClient.CommunicationLayer
 {
 
     public sealed class Communication // singleTon
