@@ -35,10 +35,10 @@ namespace MileStone1.LogicLayer
         {
             return CommunicationLayer.Communication.Instance.Send(URL, _groupId, _nickname, body);
         }
-        
+       
         private void SaveToPresistent()
         {
-
+            
         }
 
         public String GetNickname()

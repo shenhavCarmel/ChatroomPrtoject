@@ -9,11 +9,12 @@ namespace MileStone1.PresentationLayer
 {
     class GUI
     {
-        private string _startMenuBar = "~Group25 ChatRoom~" + "\r\n" + "1- Register" + "\r\n" + "2- Login" +
+        private string _startMenuBar = "~ChatRoom~" + "\r\n" + "1- Register" + "\r\n" + "2- Login" +
                                 "\r\n" + "3- Exit";
-        private string _menuBar = "~Group25 ChatRoom~" + "\r\n" + "4- Send message" + "\r\n" + "5- View last messages" +
+        private string _menuBar = "~ChatRoom~" + "\r\n" + "4- Send message" + "\r\n" + "5- View last messages" +
                             "\r\n" + "6- View messages written by a certain user" + "\r\n" + "7- Retrieve messages from server" + "\r\n" + "8- logout" + "\r\n";
         private Boolean DisplayFirstMenu;
+        
 
         public GUI()
         {
@@ -86,10 +87,12 @@ namespace MileStone1.PresentationLayer
         {
             //go to logic layer and register user
             Console.WriteLine("Register:");
+            Console.WriteLine("To return to the menu bar, press 'Y'");
             Console.WriteLine("Please enter your group ID");
 
             string strGroupID = Console.ReadLine();
             strGroupID = CheckgroupId(strGroupID);
+
 
             if (strGroupID.Equals("Y"))
             {
@@ -97,14 +100,17 @@ namespace MileStone1.PresentationLayer
                 DisplayMenuBars();
             }
 
-            Console.WriteLine("Enter your nickname");
+            Console.WriteLine("Please enter your nickname");
 
             string nickname = Console.ReadLine();
 
-            if (LogicLayer.ChatRoom.Instance.Register(nickname, strGroupID))
+            if (ChatRoom.Instance.Register(nickname, strGroupID))
             {
+                Console.Clear();
                 Console.WriteLine("Registered succesfully");
-                DisplayFirstMenu = false;
+                Console.WriteLine("Please press enter to continue");
+                Console.ReadLine();
+                DisplayFirstMenu = true;
                 DisplayMenuBars();
             }
             else
@@ -112,7 +118,6 @@ namespace MileStone1.PresentationLayer
                 Console.WriteLine("Registered failed. This nickname is already taken.");
                 while (!LogicLayer.ChatRoom.Instance.Register(nickname, strGroupID) && !nickname.Equals("Y"))
                 {
-                    Console.WriteLine("Invalid Input");
                     // TODO: write the error to the logger
                     Console.WriteLine("Re-enter your nickname. If you want to return to the menu bar press 'Y':");
                     nickname = Console.ReadLine();
@@ -125,6 +130,7 @@ namespace MileStone1.PresentationLayer
             }
             Console.WriteLine("Press enter to continue");
             Console.ReadLine();
+
             DisplayMenuBars();
 
         }
@@ -132,6 +138,7 @@ namespace MileStone1.PresentationLayer
         private void LoginCase()
         {
             Console.WriteLine("Login:");
+            Console.WriteLine("To return to the menu bar, press 'Y'");
             Console.WriteLine("Please enter your groupId");
 
             String strGroupID = Console.ReadLine();
@@ -146,7 +153,7 @@ namespace MileStone1.PresentationLayer
             Console.WriteLine("Enter your nickname");
             String nickname = Console.ReadLine();
 
-            if (LogicLayer.ChatRoom.Instance.Login(nickname, strGroupID))
+            if (ChatRoom.Instance.Login(nickname, strGroupID))
             {
                 Console.WriteLine("Logged In successfully");
                 DisplayFirstMenu = false;
@@ -155,9 +162,8 @@ namespace MileStone1.PresentationLayer
             else
             {
                 Console.WriteLine("Log In failed. This nickname doesn't exist.");
-                while (!LogicLayer.ChatRoom.Instance.Login(nickname, strGroupID) && !nickname.Equals("Y"))
+                while (!ChatRoom.Instance.Login(nickname, strGroupID) && !nickname.Equals("Y"))
                 {
-                    Console.WriteLine("Invalid Input");
                     // TODO: write the error to the logger
                     Console.WriteLine("Re-enter your nickname. If you want to return to the menu bar, press 'Y':");
                     nickname = Console.ReadLine();
@@ -179,16 +185,14 @@ namespace MileStone1.PresentationLayer
             Console.WriteLine("If you sure you want to exit, please press 'Y'");
             if (Console.ReadLine().Equals("Y"))
             {
-                if (LogicLayer.ChatRoom.Instance.CanExit())
+                if (ChatRoom.Instance.CanExit())
                 {
                     Console.Clear();
                     Console.WriteLine("Good bye");
+
                     // TODO closing stuff
                 }
             }
-            Console.WriteLine("Press enter to continue");
-            Console.ReadLine();
-            DisplayMenuBars();
         }
 
         private void SendCase()
@@ -202,7 +206,7 @@ namespace MileStone1.PresentationLayer
 
         private void DisplayLastMsgsCase()
         {
-            foreach (Message currMsg in LogicLayer.ChatRoom.Instance.DisplayLastMsg())
+            foreach (Message currMsg in ChatRoom.Instance.DisplayLastMsg())
             {
                 Console.WriteLine(currMsg.toString());
             }
@@ -219,7 +223,7 @@ namespace MileStone1.PresentationLayer
             String groupId = Console.ReadLine();
             try
             {
-                foreach (Message curr in LogicLayer.ChatRoom.Instance.DisplayMsgByUser(nickname, groupId))
+                foreach (Message curr in ChatRoom.Instance.DisplayMsgByUser(nickname, groupId))
                 {
                     Console.WriteLine(curr.toString());
                 }
@@ -236,7 +240,7 @@ namespace MileStone1.PresentationLayer
 
         private void RetrieveFromServer()
         {
-            LogicLayer.ChatRoom.Instance.RetrieveMsg();
+            ChatRoom.Instance.RetrieveMsg();
             Console.WriteLine("Retrieved messages from server successfuly");
             Console.WriteLine("Please press enter to continue");
             Console.ReadLine();
@@ -249,7 +253,7 @@ namespace MileStone1.PresentationLayer
             Console.WriteLine("If you sure you want to logout, please press 'Y':");
             if (Console.ReadLine().Equals("Y"))
             {
-                LogicLayer.ChatRoom.Instance.Logout();
+                ChatRoom.Instance.Logout();
                 DisplayFirstMenu = true;
                 Console.WriteLine("Logged out successfuly");
                 Console.WriteLine("Please press enter to continue");
