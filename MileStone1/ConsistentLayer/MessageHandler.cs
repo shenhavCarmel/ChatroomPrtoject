@@ -14,10 +14,12 @@ namespace MileStone1.ConsistentLayer
     {
         private String _fileName;
         private Stream _stream;
+        private List<Message> _messagesList;
 
         public MessageHandler()
         {
-            this._fileName = "MessagesFile.data";
+            this._messagesList = new List<Message>();
+            this._fileName = "MessageFile.bin";
             if (!File.Exists(this._fileName))
             {
                 this._stream = File.Create(this._fileName);
@@ -27,51 +29,55 @@ namespace MileStone1.ConsistentLayer
             else
             {
                 this._stream = File.OpenRead(this._fileName);
-                _stream.Close();
+                if (_stream.Length != 0)
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    _messagesList = (List<Message>)bf.Deserialize(_stream);
+                    _stream.Close();
+                    File.Delete(_fileName);
+                    _stream = File.Create(_fileName);
+                    _stream.Close();
+                    _stream = File.OpenRead(_fileName);
+                    bf.Serialize(_stream, _messagesList);
+                    _stream.Close();
+                }
+                else _stream.Close();
             }
         }
         public List<Message> GetMessagesList()
         {
-            List<Message> messages = new List<Message>();
-            if (_stream.Length != 0)
-            {
-                this._stream = File.OpenRead(this._fileName);
-                BinaryFormatter des = new BinaryFormatter();
-                if (new FileInfo(this._fileName).Length != 0)
-                    messages = (List<Message>)des.Deserialize(_stream);
-
-            }
-            return messages;
+            return _messagesList;
         }
 
-        internal List<User> GetUsersList()
-        {
-            throw new NotImplementedException();
-        }
 
         public void SaveMessage(Message msg)
         {
-            List<Message> messages = GetMessagesList();
-            if (!messages.Contains(msg))
+            if (!_messagesList.Contains(msg))
             {
-                messages.Add(msg);
+                _messagesList.Add(msg);
+                File.Delete(_fileName);
+                _stream = File.Create(_fileName);
+                _stream.Close();
+                _stream = File.OpenWrite(_fileName);
                 BinaryFormatter bf = new BinaryFormatter();
-                //bf.Deserialize(_stream);
-                //_stream = File.OpenRead(this._fileName).Serialize(_stream, messages);
+                bf.Serialize(_stream, _messagesList);
                 _stream.Close();
             }
         }
         public void SaveMessageList(List<Message> msg)
-        {
-            List<Message> messagesList = GetMessagesList();
+        { 
             foreach (Message currMsg in msg)
             {
-                if (!messagesList.Contains(currMsg))
-                    messagesList.Add(currMsg);
+                if (!_messagesList.Contains(currMsg))
+                    _messagesList.Add(currMsg);
             }
+            File.Delete(_fileName);
+            _stream = File.Create(_fileName);
+            _stream.Close();
+            _stream = File.OpenWrite(_fileName);
             BinaryFormatter bf = new BinaryFormatter();
-            bf.Deserialize(_stream);
-            bf.Serialize(_stream, messagesList);
+            bf.Serialize(_stream, _messagesList);
+            _stream.Close();
         }
     }
 }

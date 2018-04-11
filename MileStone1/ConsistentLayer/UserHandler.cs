@@ -16,41 +16,53 @@ namespace MileStone1.ConsistentLayer
     {
         private String _fileName;
         private Stream _stream;
-
+        private List<User> _usersList;
 
 
         public UserHandler()
         {
-            this._fileName = "userFile.data";
+            
+            this._usersList = new List<User>();
+            this._fileName = "userFile.bin"; 
             if (!File.Exists(this._fileName))
             {
                 this._stream = File.Create(this._fileName);
                 _stream.Close();
 
             }
-
+            else
+            {
+                this._stream = File.OpenRead(this._fileName);
+                if (_stream.Length != 0)
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    _usersList = (List<User>)bf.Deserialize(_stream);
+                    _stream.Close();
+                    File.Delete(_fileName);
+                    _stream=File.Create(_fileName);
+                    _stream.Close();
+                    _stream = File.OpenRead(_fileName);
+                    bf.Serialize(_stream, _usersList);
+                    _stream.Close();
+                }
+                else _stream.Close();
+            }
         }
         public List<User> GetUsersList()
         {
-            List<User> users = new List<User>();
-            if (_stream.Length != 0)
-            {
-                this._stream = File.OpenRead(this._fileName);
-                BinaryFormatter bf = new BinaryFormatter();
-                users = (List<User>)bf.Deserialize(_stream);
-              //  _stream.Close();
-          }
-            return users;
-      
+            return _usersList;
          } 
         
         public void SaveUser(User user)
         {
-            List<User> users = GetUsersList();
-            users.Add(user);
+            _usersList.Add(user);
+            File.Delete(_fileName);
+            _stream=File.Create(_fileName);
+            _stream.Close();
+            _stream = File.OpenWrite(_fileName);
             BinaryFormatter bf = new BinaryFormatter();
-            bf.Deserialize(_stream);
-            bf.Serialize(_stream, users);
+            bf.Serialize(_stream, _usersList);
+            _stream.Close();
         }
 
     }
