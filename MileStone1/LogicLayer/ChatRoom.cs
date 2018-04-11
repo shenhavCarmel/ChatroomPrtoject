@@ -159,6 +159,8 @@ namespace MileStone1.LogicLayer
                 // send message content to server through user, save the returned object message
                 Message newSentMessage = _loggedInUser.SendMessage(body, _URL);
 
+                _messages.Add(newSentMessage);
+
                 // save to persistent 
                 _msgHandler.SaveMessage(newSentMessage);
 
