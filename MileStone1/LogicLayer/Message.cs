@@ -11,47 +11,36 @@ namespace MileStone1.LogicLayer
     class Message
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger
-           (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+                            (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        //fields
         private string _messageContent;
         private Guid _ID;
         private DateTime _timeStamp;
         private string _groupID;
         private string _userName;
-        // copy constructor
+
         public Message(IMessage msgToCopy)
         {
-            if (msgToCopy.MessageContent.Length <= 150)
-            {
-                this._messageContent = msgToCopy.MessageContent;
-                this._groupID = msgToCopy.GroupID;
-                this._userName = msgToCopy.UserName;
-                this._ID = msgToCopy.Id;
-                this._timeStamp = msgToCopy.Date;
-            }
-            else
-            {
-                //logger.
-                log.Info("User tryed to send a message with over 150 characters");
-                throw new ArgumentException("Message content over 150 characters " + "\n\r " + "send a new message");
-            }
+
+            this._messageContent = msgToCopy.MessageContent;
+            this._groupID = msgToCopy.GroupID;
+            this._userName = msgToCopy.UserName;
+            this._ID = msgToCopy.Id;
+            this._timeStamp = msgToCopy.Date;
+
+            // logger
+            log.Info("New message was created");
         }
-        // constructor
+
         public Message(string body, User user)
         {
-            if (body.Length <= 150)
-            {
-                this._messageContent = body;
-                this._groupID = user.GetGroupId();
-                this._userName = user.GetNickname();
-            }
-            else
-            {
-                //logger.
-                log.Info("User tryed to send a message with over 150 characters");
-                throw new ArgumentException("Message content over 150 characters" + "\n\r " + "send a new message");
-            }
+
+            this._messageContent = body;
+            this._groupID = user.GetGroupId();
+            this._userName = user.GetNickname();
+
+            // logger
+            log.Info("New message was created");
         }
 
         public String GetMessageContent()
@@ -84,8 +73,9 @@ namespace MileStone1.LogicLayer
 
         public String toString()
         {
-            return ("Sender: " + this._userName + "\r\n" + "Time Stamp: " + this._timeStamp
-                + "\r\n" + "GUID: " + this._ID + "\r\n" + "Body: " + this._messageContent);
+            return ("Sender nickname: " + this._userName + "\r\n" + "Sender groupID: "
+                + this._groupID + "\r\n" + "Time Stamp: " + this._timeStamp + "\r\n" +
+                "GUID: " + this._ID + "\r\n" + "Body: " + this._messageContent);
         }
 
 
