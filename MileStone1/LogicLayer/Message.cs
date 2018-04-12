@@ -34,7 +34,7 @@ namespace MileStone1.LogicLayer
             {
                 //logger.
                 log.Info("User tryed to send a message with over 150 characters");
-                throw new ArgumentException("Message content over 150 characters " + "\n\r " + "send a new message);
+                throw new ArgumentException("Message content over 150 characters " + "\n\r " + "send a new message");
             }
         }
         // constructor
@@ -50,7 +50,7 @@ namespace MileStone1.LogicLayer
             {
                 //logger.
                 log.Info("User tryed to send a message with over 150 characters");
-                throw new ArgumentException("Message content over 150 characters" + "\n\r " + "send a new message);
+                throw new ArgumentException("Message content over 150 characters" + "\n\r " + "send a new message");
             }
         }
 
