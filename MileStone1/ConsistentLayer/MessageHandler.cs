@@ -10,12 +10,18 @@ using MileStone1.LogicLayer;
 
 namespace MileStone1.ConsistentLayer
 {
+    //the UserHandler class trancfers message's information to files.
     class MessageHandler
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger
+          (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        // fields
         private String _fileName;
         private Stream _stream;
         private List<Message> _messagesList;
 
+        // constructor
         public MessageHandler()
         {
             this._messagesList = new List<Message>();
@@ -29,41 +35,41 @@ namespace MileStone1.ConsistentLayer
             else
             {
                 this._stream = File.OpenRead(this._fileName);
-                if (_stream.Length != 0)
+                BinaryFormatter bf = new BinaryFormatter();
+                if (new FileInfo(_fileName).Length != 0)
                 {
-                    BinaryFormatter bf = new BinaryFormatter();
                     _messagesList = (List<Message>)bf.Deserialize(_stream);
-                    _stream.Close();
-                    File.Delete(_fileName);
-                    _stream = File.Create(_fileName);
-                    _stream.Close();
-                    _stream = File.OpenRead(_fileName);
-                    bf.Serialize(_stream, _messagesList);
                     _stream.Close();
                 }
                 else _stream.Close();
             }
         }
+
         public List<Message> GetMessagesList()
         {
             return _messagesList;
         }
 
-
+        //this method saves a new message's information in files
         public void SaveMessage(Message msg)
         {
             if (!_messagesList.Contains(msg))
             {
                 _messagesList.Add(msg);
-                File.Delete(_fileName);
+                if (File.Exists(_fileName))
+                    File.Delete(_fileName);
                 _stream = File.Create(_fileName);
                 _stream.Close();
                 _stream = File.OpenWrite(_fileName);
                 BinaryFormatter bf = new BinaryFormatter();
                 bf.Serialize(_stream, _messagesList);
                 _stream.Close();
+                //logger
+                log.Info("Message written to files");
             }
+
         }
+        //this method saves a new message's information from a messages list in files
         public void SaveMessageList(List<Message> msg)
         { 
             foreach (Message currMsg in msg)
@@ -71,13 +77,17 @@ namespace MileStone1.ConsistentLayer
                 if (!_messagesList.Contains(currMsg))
                     _messagesList.Add(currMsg);
             }
-            File.Delete(_fileName);
+            if (File.Exists(_fileName)) 
+                File.Delete(_fileName);
             _stream = File.Create(_fileName);
             _stream.Close();
             _stream = File.OpenWrite(_fileName);
             BinaryFormatter bf = new BinaryFormatter();
             bf.Serialize(_stream, _messagesList);
             _stream.Close();
+
+            //logger
+            log.Info("Messages written to files");
         }
     }
 }
