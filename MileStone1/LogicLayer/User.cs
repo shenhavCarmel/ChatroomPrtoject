@@ -7,12 +7,15 @@ using MileStoneClient.CommunicationLayer;
 
 namespace MileStone1.LogicLayer
 {
+    [Serializable]
     class User
     {
+        // Fields
         private Boolean _isLoggedIn;
         private String _nickname;
         private string _groupId;
 
+        // Constructors
         public User (String nickname, string groupId)
         {
             this._isLoggedIn = false;
@@ -33,10 +36,18 @@ namespace MileStone1.LogicLayer
 
         public Message SendMessage(string body, String URL)
         {
-            IMessage sentMsg = Communication.Instance.Send(URL, _groupId, _nickname, body);
+            try
+            {
+                IMessage sentMsg = Communication.Instance.Send(URL, _groupId, _nickname, body);
 
-            // return the IMessage converted to message
-            return new Message(sentMsg);
+                // return the IMessage converted to message
+                return new Message(sentMsg);
+            }
+            catch
+            {
+                throw new Exception();
+            }
+
         }
 
         public String GetNickname()
