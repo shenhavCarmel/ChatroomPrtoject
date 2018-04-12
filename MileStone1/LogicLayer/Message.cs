@@ -10,12 +10,16 @@ namespace MileStone1.LogicLayer
     [Serializable]
     class Message
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger
+           (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        //fields
         private string _messageContent;
         private Guid _ID;
         private DateTime _timeStamp;
         private string _groupID;
         private string _userName;
-
+        // copy constructor
         public Message(IMessage msgToCopy)
         {
             if (msgToCopy.MessageContent.Length <= 150)
@@ -28,10 +32,12 @@ namespace MileStone1.LogicLayer
             }
             else
             {
-                throw new ArgumentException("Message content over 150 characters");
+                //logger.
+                log.Info("User tryed to send a message with over 150 characters");
+                throw new ArgumentException("Message content over 150 characters " + "\n\r " + "send a new message);
             }
         }
-
+        // constructor
         public Message(string body, User user)
         {
             if (body.Length <= 150)
@@ -42,7 +48,9 @@ namespace MileStone1.LogicLayer
             }
             else
             {
-                throw new ArgumentException("Message content over 150 characters");
+                //logger.
+                log.Info("User tryed to send a message with over 150 characters");
+                throw new ArgumentException("Message content over 150 characters" + "\n\r " + "send a new message);
             }
         }
 
