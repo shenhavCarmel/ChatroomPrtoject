@@ -1,0 +1,37 @@
+C:\Nofar\ISE182_project23\MileStone2\bin\Debug\MileStone2.exe.config
+C:\Nofar\ISE182_project23\MileStone2\bin\Debug\MileStone2.exe
+C:\Nofar\ISE182_project23\MileStone2\bin\Debug\MileStone2.pdb
+C:\Nofar\ISE182_project23\MileStone2\obj\Debug\MileStone2.csprojResolveAssemblyReference.cache
+C:\Nofar\ISE182_project23\MileStone2\obj\Debug\FirstWindow.g.cs
+C:\Nofar\ISE182_project23\MileStone2\obj\Debug\App.g.cs
+C:\Nofar\ISE182_project23\MileStone2\obj\Debug\MileStone2_MarkupCompile.cache
+C:\Nofar\ISE182_project23\MileStone2\obj\Debug\MileStone2_MarkupCompile.lref
+C:\Nofar\ISE182_project23\MileStone2\obj\Debug\FirstWindow.baml
+C:\Nofar\ISE182_project23\MileStone2\obj\Debug\MileStone2.g.resources
+C:\Nofar\ISE182_project23\MileStone2\obj\Debug\MileStone2.Properties.Resources.resources
+C:\Nofar\ISE182_project23\MileStone2\obj\Debug\MileStone2.csproj.GenerateResource.cache
+C:\Nofar\ISE182_project23\MileStone2\obj\Debug\MileStone2.csproj.CoreCompileInputs.cache
+C:\Nofar\ISE182_project23\MileStone2\obj\Debug\MileStone2.exe
+C:\Nofar\ISE182_project23\MileStone2\obj\Debug\MileStone2.pdb
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\bin\Debug\MileStone2.exe.config
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\bin\Debug\MileStone2.exe
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\bin\Debug\MileStone2.pdb
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\bin\Debug\log4net.dll
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\bin\Debug\log4net.xml
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\obj\Debug\Milestone2.csprojResolveAssemblyReference.cache
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\obj\Debug\PresentationLayer\FirstWindow.g.cs
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\obj\Debug\PresentationLayer\ChatWindow.g.cs
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\obj\Debug\App.g.cs
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\obj\Debug\MileStone2_MarkupCompile.cache
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\obj\Debug\MileStone2_MarkupCompile.lref
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\obj\Debug\PresentationLayer\FirstWindow.baml
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\obj\Debug\PresentationLayer\ChatWindow.baml
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\obj\Debug\MileStone2.g.resources
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\obj\Debug\MileStone2.Properties.Resources.resources
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\obj\Debug\Milestone2.csproj.GenerateResource.cache
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\obj\Debug\Milestone2.csproj.CoreCompileInputs.cache
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\obj\Debug\Milestone2.csproj.CopyComplete
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\obj\Debug\MileStone2.exe
+C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\obj\Debug\MileStone2.pdb
