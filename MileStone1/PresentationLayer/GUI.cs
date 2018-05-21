@@ -315,9 +315,9 @@ namespace MileStone1.PresentationLayer
             String msgBody = Console.ReadLine();
 
             // check if the the content is over 150 characters - illegal
-            if (msgBody.Length > 150)
+            if (msgBody.Length > 150 | msgBody.Length == 0)
             {
-                Console.WriteLine("Sending failed, message can't be over 150 characters.");
+                Console.WriteLine("Sending failed, message can't be over 150 characters or empty");
                 Console.WriteLine("Press enter to continue");
                 Console.ReadLine();
 

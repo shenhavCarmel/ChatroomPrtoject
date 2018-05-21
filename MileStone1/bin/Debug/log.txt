@@ -1,0 +1,160 @@
+2018-04-12 12:57:58,874 [1] INFO  MileStone1.Start [(null)] - start the log
+2018-04-12 12:58:10,438 [1] ERROR MileStone1.PresentationLayer.GUI [(null)] - User tried to enter a non numeric input for groupID value
+2018-04-12 12:58:25,582 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Quick Messages List was sorted
+2018-04-12 12:58:25,588 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - A new user registered
+2018-04-12 12:58:36,167 [1] ERROR MileStone1.LogicLayer.ChatRoom [(null)] - A non registered user tried to login
+2018-04-12 12:58:36,167 [1] INFO  MileStone1.PresentationLayer.GUI [(null)] - the user trying to login isn't registered.
+2018-04-12 12:58:57,683 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged in to the chatroom
+2018-04-12 12:59:24,664 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User displaying 20 last messages
+2018-04-12 12:59:37,984 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged out
+2018-04-12 12:59:43,819 [7] INFO  MileStone1.PresentationLayer.GUI [(null)] - Chatroom closed
+2018-04-12 13:04:15,571 [1] INFO  MileStone1.Start [(null)] - start the log
+2018-04-12 13:04:24,697 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Quick Messages List was sorted
+2018-04-12 13:04:24,697 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged in to the chatroom
+2018-04-12 13:04:30,250 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-12 13:04:30,250 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-12 13:04:30,250 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-12 13:04:30,250 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-12 13:04:30,250 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-12 13:04:30,250 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-12 13:04:30,250 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Quick Messages List was sorted
+2018-04-12 13:04:30,250 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Chatroom retrieved 10 messages from server
+2018-04-12 13:05:01,417 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User displaying messages sent by a specific user
+2018-04-12 13:05:08,433 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User displaying messages sent by a specific user
+2018-04-12 13:05:14,875 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User displaying 20 last messages
+2018-04-12 13:06:01,041 [1] ERROR MileStone1.LogicLayer.ChatRoom [(null)] - The user tried to display messages from a non-registered user
+2018-04-12 13:06:52,351 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-12 13:06:52,351 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User sent a new message
+2018-04-12 13:06:57,250 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged out
+2018-04-12 13:07:02,657 [10] INFO  MileStone1.PresentationLayer.GUI [(null)] - Chatroom closed
+2018-04-12 13:07:05,438 [1] INFO  MileStone1.Start [(null)] - start the log
+2018-04-12 13:07:11,974 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Quick Messages List was sorted
+2018-04-12 13:07:11,975 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged in to the chatroom
+2018-04-12 13:07:15,959 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Quick Messages List was sorted
+2018-04-12 13:07:15,961 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Chatroom retrieved 10 messages from server
+2018-04-12 13:07:24,504 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User displaying messages sent by a specific user
+2018-04-12 13:16:11,613 [1] INFO  MileStone1.Start [(null)] - start the log
+2018-04-12 13:16:19,094 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Quick Messages List was sorted
+2018-04-12 13:16:19,095 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged in to the chatroom
+2018-04-12 13:16:27,834 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-12 13:16:27,837 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User sent a new message
+2018-04-12 13:23:47,312 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Quick Messages List was sorted
+2018-04-12 13:23:47,336 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged in to the chatroom
+2018-04-12 13:23:52,053 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged out
+2018-04-12 13:30:39,107 [1] INFO  MileStone1.PresentationLayer.GUI [(null)] - Begginig of the log
+2018-04-12 13:30:45,282 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Quick Messages List was sorted
+2018-04-12 13:30:45,282 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged in to the chatroom
+2018-04-12 13:30:54,389 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User displaying messages sent by a specific user
+2018-04-12 13:31:01,270 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged out
+2018-04-12 13:31:05,900 [1] INFO  MileStone1.PresentationLayer.GUI [(null)] - The logged in user asked to Exit the chatRoom
+2018-04-24 16:50:33,495 [1] INFO  MileStone1.PresentationLayer.GUI [(null)] - Begginig of the log
+2018-04-24 16:50:41,638 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Quick Messages List was sorted
+2018-04-24 16:50:41,640 [1] ERROR MileStone1.LogicLayer.ChatRoom [(null)] - An existing user tried to register again
+2018-04-24 16:50:41,640 [1] ERROR MileStone1.LogicLayer.ChatRoom [(null)] - An existing user tried to register again
+2018-04-24 16:50:41,640 [1] INFO  MileStone1.PresentationLayer.GUI [(null)] - Registered failed-wrong nickname/groupID
+2018-04-24 16:50:43,679 [1] INFO  MileStone1.ConsistentLayer.UserHandler [(null)] - User written to files
+2018-04-24 16:50:43,679 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - A new user registered
+2018-04-24 16:50:51,999 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged in to the chatroom
+2018-04-24 16:50:57,861 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 16:50:57,866 [1] INFO  MileStone1.ConsistentLayer.MessageHandler [(null)] - Message written to files
+2018-04-24 16:50:57,866 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User sent a new message
+2018-04-24 16:52:13,634 [1] INFO  MileStone1.PresentationLayer.GUI [(null)] - Begginig of the log
+2018-04-24 16:52:19,386 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Quick Messages List was sorted
+2018-04-24 16:52:19,389 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged in to the chatroom
+2018-04-24 16:52:25,128 [1] ERROR MileStone1.PresentationLayer.GUI [(null)] - User tried to send a message over 150 characters
+2018-04-24 16:52:28,289 [1] ERROR MileStone1.PresentationLayer.GUI [(null)] - The user tried to enter illegal input of the menu
+2018-04-24 16:52:31,876 [1] ERROR MileStone1.PresentationLayer.GUI [(null)] - The user tried to enter illegal input of the menu
+2018-04-24 16:52:39,513 [1] ERROR MileStone1.PresentationLayer.GUI [(null)] - The user tried to enter illegal input of the menu
+2018-04-24 16:52:47,411 [1] ERROR MileStone1.PresentationLayer.GUI [(null)] - The user tried to enter illegal input of the menu
+2018-04-24 16:52:51,127 [1] ERROR MileStone1.PresentationLayer.GUI [(null)] - The user tried to enter illegal input of the menu
+2018-04-24 16:53:00,387 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged out
+2018-04-24 16:53:06,048 [1] INFO  MileStone1.PresentationLayer.GUI [(null)] - The logged in user asked to Exit the chatRoom
+2018-04-24 16:55:04,013 [1] INFO  MileStone1.PresentationLayer.GUI [(null)] - Begginig of the log
+2018-04-24 16:55:08,810 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Quick Messages List was sorted
+2018-04-24 16:55:08,816 [1] INFO  MileStone1.ConsistentLayer.UserHandler [(null)] - User written to files
+2018-04-24 16:55:08,816 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - A new user registered
+2018-04-24 16:55:15,067 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged in to the chatroom
+2018-04-24 16:55:24,797 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 16:55:24,804 [1] INFO  MileStone1.ConsistentLayer.MessageHandler [(null)] - Message written to files
+2018-04-24 16:55:24,804 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User sent a new message
+2018-04-24 16:55:33,307 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 16:55:33,310 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 16:55:33,310 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 16:55:33,310 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 16:55:33,310 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 16:55:33,311 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 16:55:33,311 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 16:55:33,311 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 16:55:33,311 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 16:55:33,311 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 16:55:33,311 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Quick Messages List was sorted
+2018-04-24 16:55:33,315 [1] INFO  MileStone1.ConsistentLayer.MessageHandler [(null)] - Messages written to files
+2018-04-24 16:55:33,315 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Chatroom retrieved 10 messages from server
+2018-04-24 16:55:38,327 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User displaying 20 last messages
+2018-04-24 16:56:15,976 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User displaying 20 last messages
+2018-04-24 16:56:59,631 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User displaying messages sent by a specific user
+2018-04-24 16:57:13,696 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User displaying messages sent by a specific user
+2018-04-24 16:57:34,605 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged out
+2018-04-24 16:57:44,680 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged in to the chatroom
+2018-04-24 16:58:00,464 [1] ERROR MileStone1.PresentationLayer.GUI [(null)] - User tried to send a message over 150 characters
+2018-04-24 16:58:08,719 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User displaying 20 last messages
+2018-04-24 16:58:31,704 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged out
+2018-04-24 16:58:37,645 [1] ERROR MileStone1.PresentationLayer.GUI [(null)] - The user tried to enter illegal input of the menu
+2018-04-24 16:58:53,752 [1] INFO  MileStone1.PresentationLayer.GUI [(null)] - The logged in user asked to Exit the chatRoom
+2018-04-24 17:04:27,742 [1] INFO  MileStone1.PresentationLayer.GUI [(null)] - Begginig of the log
+2018-04-24 17:04:49,512 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Quick Messages List was sorted
+2018-04-24 17:04:49,517 [1] INFO  MileStone1.ConsistentLayer.UserHandler [(null)] - User written to files
+2018-04-24 17:04:49,518 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - A new user registered
+2018-04-24 17:04:57,049 [1] INFO  MileStone1.PresentationLayer.GUI [(null)] - The logged in user asked to Exit the chatRoom
+2018-04-24 17:05:55,893 [1] INFO  MileStone1.PresentationLayer.GUI [(null)] - Begginig of the log
+2018-04-24 17:06:16,271 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Quick Messages List was sorted
+2018-04-24 17:06:16,277 [1] INFO  MileStone1.ConsistentLayer.UserHandler [(null)] - User written to files
+2018-04-24 17:06:16,277 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - A new user registered
+2018-04-24 17:06:20,235 [1] INFO  MileStone1.PresentationLayer.GUI [(null)] - The logged in user asked to Exit the chatRoom
+2018-04-24 17:07:21,671 [1] INFO  MileStone1.PresentationLayer.GUI [(null)] - Begginig of the log
+2018-04-24 17:07:29,392 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Quick Messages List was sorted
+2018-04-24 17:07:29,397 [1] INFO  MileStone1.ConsistentLayer.UserHandler [(null)] - User written to files
+2018-04-24 17:07:29,397 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - A new user registered
+2018-04-24 17:07:35,671 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged in to the chatroom
+2018-04-24 17:07:44,786 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 17:07:44,798 [1] INFO  MileStone1.ConsistentLayer.MessageHandler [(null)] - Message written to files
+2018-04-24 17:07:44,799 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User sent a new message
+2018-04-24 17:07:50,901 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User displaying 20 last messages
+2018-04-24 17:08:04,518 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 17:08:04,521 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 17:08:04,521 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 17:08:04,521 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 17:08:04,521 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 17:08:04,522 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 17:08:04,522 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 17:08:04,522 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 17:08:04,522 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 17:08:04,523 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 17:08:04,523 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Quick Messages List was sorted
+2018-04-24 17:08:04,528 [1] INFO  MileStone1.ConsistentLayer.MessageHandler [(null)] - Messages written to files
+2018-04-24 17:08:04,528 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Chatroom retrieved 10 messages from server
+2018-04-24 17:08:07,271 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User displaying 20 last messages
+2018-04-24 17:08:34,431 [1] ERROR MileStone1.LogicLayer.ChatRoom [(null)] - The user tried to display messages from a non-registered user
+2018-04-24 17:08:48,947 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 17:08:48,948 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 17:08:48,948 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 17:08:48,948 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 17:08:48,948 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 17:08:48,948 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 17:08:48,949 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 17:08:48,949 [1] INFO  MileStone1.LogicLayer.Message [(null)] - New message was created
+2018-04-24 17:08:48,949 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Quick Messages List was sorted
+2018-04-24 17:08:48,954 [1] INFO  MileStone1.ConsistentLayer.MessageHandler [(null)] - Messages written to files
+2018-04-24 17:08:48,954 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Chatroom retrieved 10 messages from server
+2018-04-24 17:08:56,590 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User displaying 20 last messages
+2018-04-24 17:10:18,167 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User displaying 20 last messages
+2018-04-24 17:10:35,684 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User displaying messages sent by a specific user
+2018-04-24 17:11:25,832 [1] ERROR MileStone1.PresentationLayer.GUI [(null)] - User tried to send a message over 150 characters
+2018-04-24 17:11:27,559 [1] ERROR MileStone1.PresentationLayer.GUI [(null)] - The user tried to enter illegal input of the menu
+2018-04-24 17:11:39,807 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged out
+2018-04-24 17:11:43,828 [1] INFO  MileStone1.PresentationLayer.GUI [(null)] - The logged in user asked to Exit the chatRoom
+2018-05-07 11:28:20,977 [1] INFO  MileStone1.PresentationLayer.GUI [(null)] - Begginig of the log
+2018-05-07 11:28:33,397 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - Quick Messages List was sorted
+2018-05-07 11:28:33,397 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged in to the chatroom
+2018-05-07 11:28:37,176 [1] INFO  MileStone1.LogicLayer.ChatRoom [(null)] - User logged out
+2018-05-07 11:28:39,938 [1] INFO  MileStone1.PresentationLayer.GUI [(null)] - The logged in user asked to Exit the chatRoom

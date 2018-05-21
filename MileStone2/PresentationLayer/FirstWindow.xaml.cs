@@ -24,16 +24,19 @@ namespace MileStone2.PresentationLayer
     public partial class FirstWindow : Window
     {
         private ChatRoom chatR;
+        private ActionListener _chatBinder;
         public FirstWindow()
         {
             InitializeComponent();
-            this.chatR = new ChatRoom();
+            _chatBinder = new ActionListener();
+            this.DataContext = _chatBinder;
+            this.chatR = new ChatRoom(_chatBinder);
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            string strGroupID = txtGroupId.Text;
-            string strNickname = txtNickname.Text;
+            String strNickname = _chatBinder.StartNickname;
+            String strGroupID = _chatBinder.StartGroupId;
 
             if (CheckValidGroupId(strGroupID) && this.chatR.Register(strNickname, strGroupID))
             {
@@ -53,25 +56,32 @@ namespace MileStone2.PresentationLayer
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            string nickName = txtNickname.Text;
-            string groupID = txtGroupId.Text;
+            string nickName = _chatBinder.StartNickname;
+            string groupID = _chatBinder.StartGroupId;
 
             if (chatR.Login(nickName, groupID))
             {
 
                 // switch to the next window
-                ChatRoomWindow chatWindow = new ChatRoomWindow(chatR);
+                ChatRoomWindow chatWindow = new ChatRoomWindow(chatR, _chatBinder);
                 this.Close();
                 chatWindow.ShowDialog();
             }
 
-            if (MessageBox.Show("this user is'nt registered", "invalid name", MessageBoxButton.OK
-                , MessageBoxImage.Error) == MessageBoxResult.OK)
+            else
             {
-                this.txtNickname.Clear();
-                this.txtGroupId.Clear();
+                if (MessageBox.Show("this user isn't registered", "invalid name", MessageBoxButton.OK
+                , MessageBoxImage.Error) == MessageBoxResult.OK)
+                {
+                    _chatBinder.StartNickname = "";
+                    _chatBinder.StartGroupId = "";
 
+                }
             }
+        }
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

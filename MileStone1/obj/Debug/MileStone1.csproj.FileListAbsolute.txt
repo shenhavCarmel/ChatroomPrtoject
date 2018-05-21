@@ -7,3 +7,18 @@ C:\Users\Win10\source\repos\ChatRoomProject\MileStone1\obj\Debug\MileStone1.exe
 C:\Users\Win10\source\repos\ChatRoomProject\MileStone1\obj\Debug\MileStone1.pdb
 C:\Users\Win10\source\repos\‏‏ChatRoomProject - עותק\MileStone1\obj\Debug\MileStone1.exe
 C:\Users\Win10\source\repos\‏‏ChatRoomProject - עותק\MileStone1\obj\Debug\MileStone1.pdb
+C:\Nofar\ISE182_project23\MileStone1\obj\Debug\MileStone1.csproj.CoreCompileInputs.cache
+C:\Nofar\ISE182_project23\MileStone1\obj\Debug\MileStone1.csprojResolveAssemblyReference.cache
+C:\Nofar\ISE182_project23\MileStone1\bin\Debug\MileStone1.exe.config
+C:\Nofar\ISE182_project23\MileStone1\bin\Debug\MileStone1.exe
+C:\Nofar\ISE182_project23\MileStone1\bin\Debug\MileStone1.pdb
+C:\Nofar\ISE182_project23\MileStone1\bin\Debug\Newtonsoft.Json.dll
+C:\Nofar\ISE182_project23\MileStone1\bin\Debug\Newtonsoft.Json.xml
+C:\Nofar\ISE182_project23\MileStone1\obj\Debug\MileStone1.csproj.CopyComplete
+C:\Nofar\ISE182_project23\MileStone1\obj\Debug\MileStone1.exe
+C:\Nofar\ISE182_project23\MileStone1\obj\Debug\MileStone1.pdb
+C:\Nofar\ISE182_project23\MileStone1\bin\Debug\log4net.config
+C:\Nofar\ISE182_project23\MileStone1\bin\Debug\log4net.dll
+C:\Nofar\ISE182_project23\MileStone1\bin\Debug\log4net.xml
+C:\Nofar\ISE182_project23\MileStone1\obj\Debug\App.g.cs
+C:\Nofar\ISE182_project23\MileStone1\obj\Debug\MileStone1_MarkupCompile.cache

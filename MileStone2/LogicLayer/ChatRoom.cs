@@ -1,4 +1,5 @@
 ﻿using MileStone2.ConsistentLayer;
+using MileStone2.PresentationLayer;
 using MileStoneClient.CommunicationLayer;
 using System;
 using System.Collections.Generic;
@@ -17,19 +18,29 @@ namespace MileStone2.LogicLayer
         private User _loggedInUser;
         private const String _URL = "http://ise172.ise.bgu.ac.il:80";
         private List<Message> _messages;
-        private List<User> _registeredUsers;
+        private List<Message> _currDisplayedMsgs;
+        public static List<User> _registeredUsers;
         private MessageHandler _msgHandler;
         private UserHandler _userHandler;
+        private Sorter _sorter;
+        private Filter _filter;
+        public ActionListener _chatBinder;
 
         // constructor
-        public ChatRoom()
+        public ChatRoom(ActionListener binder)
         {
             _msgHandler = new MessageHandler();
             _userHandler = new UserHandler();
+            _chatBinder = binder;
+
+            _sorter = new Sorter(_chatBinder.SelectedModeAscending, _chatBinder.SelectedTypeSorterIndex);
+            _filter = new Filter(_chatBinder.SelectedTypeFilterIndex);
 
             // load users' and messages' data from files
             _messages = _msgHandler.GetMessagesList().ToList();
             RetrieveMsg();
+            _currDisplayedMsgs = new List<Message>();
+            _currDisplayedMsgs.AddRange(_messages);
 
             _registeredUsers = _userHandler.GetUsersList().ToList();
 
@@ -38,9 +49,8 @@ namespace MileStone2.LogicLayer
 
         public List<Message> GetMessagesInChat()
         {
-            return _messages;
+            return Sort();
         }
-
 
         public Boolean Login(String nickname, string groupId)
         {
@@ -66,11 +76,6 @@ namespace MileStone2.LogicLayer
                 return false;
             }
 
-        }
-
-        internal static bool logIn(string nickName, string groupID)
-        {
-            throw new NotImplementedException();
         }
 
         public Boolean Register(String nickname, string groupId)
@@ -119,19 +124,48 @@ namespace MileStone2.LogicLayer
                 // add new messages from the server to the list of messages
                 foreach (IMessage currMsg in retrievedMsg)
                 {
-                    // check if the list of messages already contains message with the same guid
-                    if (!_messages.Exists(e => e.GetId().Equals(currMsg.Id)))
+                    int groupID;
+                    Message msg = new Message(currMsg);
+                    try
                     {
-                        _messages.Add(new Message(currMsg));
-                    }
-                }
+                        groupID = int.Parse(msg.GetGroupID());
+                        // check if the list of messages already contains message with the same guid
+                        if (!(_messages.Exists(e => e.GetId().Equals(currMsg.Id))))
+                        {
+                            _messages.Add(msg);
+                        }
 
-                // sort the messages list 
-                MsgSorter(this._messages);
+
+                        if ((_registeredUsers == null) || (!(_registeredUsers.Exists(e => e.GetNickname().Equals(msg.GetUserName()) & 
+                                                            !(_registeredUsers.Exists(x => x.GetGroupId().Equals(msg.GetGroupID())))))))
+                        {
+                                User newUser = new User(msg.GetUserName(), msg.GetGroupID());
+                                _userHandler.SaveUser(newUser);
+                                _registeredUsers.Add(newUser);
+                        }
+                    }
+                    catch
+                    {
+                        
+                    }
+
+                }
 
                 // add to presistent
                 _msgHandler.SaveMessageList(_messages);
-
+                
+                List<Message> selectedMsgs = new List<Message>();
+                try
+                {
+                    selectedMsgs.AddRange(_filter.runFilter(_messages, _registeredUsers,
+                                                        _chatBinder.FilterGroupId, _chatBinder.FilterNickname));
+                    _currDisplayedMsgs = _sorter.runSort(selectedMsgs);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                
                 // logger
                 log.Info("Chatroom retrieved 10 messages from server");
 
@@ -143,70 +177,6 @@ namespace MileStone2.LogicLayer
                 log.Error("Retrieval messages from sercer failed");
 
                 return false;
-            }
-
-        }
-
-        private void MsgSorter(List<Message> msgList)
-        {
-            // sort the new messages
-            Message[] arrMsg = msgList.ToArray();
-            Array.Sort(arrMsg, delegate (Message msg1, Message msg2) {
-                return msg1.GetDate().CompareTo(msg2.GetDate());
-            });
-
-            // logger
-            log.Info("Quick Messages List was sorted");
-
-            msgList = arrMsg.ToList();
-        }
-
-        public List<Message> DisplayLastMsg(int displayMsgAmount)
-        {
-
-            // logger
-            log.Info("User displaying "+ displayMsgAmount + " last messages");
-
-            // check the amount of messages
-            if (_messages.Count() < displayMsgAmount)
-            {
-                return _messages;
-            }
-            else
-            {
-                int startIndex = _messages.Count() - displayMsgAmount;
-                return _messages.GetRange(startIndex, displayMsgAmount);
-            }
-        }
-
-        public List<Message> DisplayMsgByUser(string nickname, string groupId)
-        {
-            User sender = new User(nickname, groupId);
-
-            if (CheckIfUserExists(sender))
-            {
-                // logger
-                log.Info("User displaying messages sent by a specific user");
-
-                // collect messages from a specific user
-                IEnumerable<Message> results =
-                     _messages.Where(currMsg => (currMsg.GetGroupID()).Equals(groupId) &&
-                                                (currMsg.GetUserName()).Equals(nickname));
-
-                // into list
-                List<Message> msgFromUser = new List<Message>();
-                foreach (Message currMsg in results)
-                {
-                    msgFromUser.Add(currMsg);
-                }
-                return msgFromUser;
-            }
-            else
-            {
-                // logger
-                log.Error("The user tried to display messages from a non-registered user");
-
-                throw new ArgumentException("Error - user isn't registered to chatroom");
             }
         }
 
@@ -251,5 +221,246 @@ namespace MileStone2.LogicLayer
         {
             return _loggedInUser == null;
         }
+
+        public List<Message> Sort()
+        {
+            _sorter.setSortingType(_chatBinder.SelectedTypeSorterIndex);
+            _sorter.setAscending(_chatBinder.SorterMode[0]);
+            return _sorter.runSort(_currDisplayedMsgs);
+        }
+
+        public void FilterMsgs()
+        {
+            
+            _filter.setFilteringType(_chatBinder.SelectedTypeFilterIndex);
+            try
+            {
+                _currDisplayedMsgs = _filter.runFilter(_messages, _registeredUsers, 
+                                         _chatBinder.FilterGroupId, _chatBinder.FilterNickname);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        private class Sorter
+        {
+            private Boolean _ascending;
+            private const int TIME_STAMP = 0;
+            private const int NICKNAME = 1;
+            private const int USER_TIMESTAMP = 2;
+            private int _sortingType;
+
+            public Sorter(Boolean isAscending, int sortType)
+            {
+                _ascending = isAscending;
+                _sortingType = sortType;
+            }
+
+            public void setAscending(Boolean isAscending)
+            {
+                _ascending = isAscending;
+            }
+
+            public void setSortingType(int sortingType)
+            {
+                _sortingType = sortingType;
+            }
+
+            public List<Message> runSort(List<Message> listToSort)
+            {
+                List<Message> msgs = new List<Message>();
+
+                switch (_sortingType)
+                {
+                    case TIME_STAMP:
+                        if (_ascending)
+                        {
+                            msgs = listToSort.OrderBy(x => x.GetDate()).ToList();
+                        }
+                        else
+                        {
+                            msgs = listToSort.OrderByDescending(x => x.GetDate()).ToList();
+                        }
+                        break;
+
+                    case NICKNAME:
+                        if (_ascending)
+                        {
+                            msgs = listToSort.OrderBy(x => x.GetUserName()).ToList();
+                        }
+                        else
+                        {
+                            msgs = listToSort.OrderByDescending(x => x.GetUserName()).ToList();
+                        }
+                        break;
+
+                    case USER_TIMESTAMP:
+                        if (_ascending)
+                        {
+                            msgs = listToSort.OrderBy(x => Int32.Parse(x.GetGroupID())).
+                                ThenBy(x => x.GetUserName()).ThenBy(x => x.GetDate()).ToList();
+
+                        }
+                        else
+                        {
+                            msgs = listToSort.OrderByDescending(x => x.GetGroupID()).
+                                ThenByDescending(x => x.GetUserName()).ThenByDescending(x => x.GetDate()).ToList();
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+                return msgs;
+            }
+        }
+        public class Filter
+        {
+            private const int GROUP = 0;
+            private const int USER = 1;
+            private const int NONE = 2;
+            private int _filteringType;
+
+            public Filter(int filteringType)
+            {
+                _filteringType = filteringType;
+            }
+
+            public void setFilteringType(int filteringType)
+            {
+                _filteringType = filteringType;
+            }
+
+            public List<Message> runFilter(List<Message> listToFilter, List<User> registeredUsers,
+                                            String userGroupId, String userNickname)
+            {
+                List<Message> msg = new List<Message>();
+
+                switch (_filteringType)
+                {
+                    case GROUP:
+                        try
+                        {
+                            msg = DisplayMsgByGroupId(userGroupId, registeredUsers, listToFilter);
+                        }
+                        catch (Exception e)
+                        {
+                            throw e;
+                        }
+                        break;
+
+                    case USER:
+                        try
+                        {
+                            msg = DisplayMsgByUser(userNickname, userGroupId, listToFilter, registeredUsers);
+                        }
+                        catch (Exception e)
+                        {
+                            throw e;
+                        } 
+                        break;
+
+                    case NONE:
+                        msg = listToFilter;
+                        break;
+
+                    default:
+                        break;
+                }
+                return msg;
+            }
+
+            public List<Message> DisplayMsgByGroupId(String groupId, List<User> registeredUsers, List<Message> messages)
+            {
+          
+                if (!groupId.Equals("")) {
+
+                    int group;
+
+                    // check if the group id inserted is legal
+                    if (int.TryParse(groupId, out group))
+                    {
+
+                        if (registeredUsers.Any((user) => user.GetGroupId() == groupId))
+                        {
+                            List<Message> msgFromGroup = new List<Message>();
+
+                            foreach (Message currMsg in messages)
+                            {
+                                if (currMsg.GetGroupID().Equals(groupId))
+                                    msgFromGroup.Add(currMsg);
+                            }
+
+                            return msgFromGroup;
+                        }
+                        else
+                            throw new ArgumentException("Group ID is illegal - group isn't registered");
+                    }
+                    else
+                        throw new ArgumentException("Group ID is illegal - only numbers are allowed");
+                }
+                return messages;
+            }
+
+            private List<Message> DisplayMsgByUser(string nickname, string groupId, List<Message> messages, List<User> registeredUsers)
+            {
+                if (!nickname.Equals("") && !groupId.Equals(""))
+                {
+                    int groupIn;
+                    if (int.TryParse(groupId, out groupIn))
+                    {
+                        User sender = new User(nickname, groupId);
+
+                        if (CheckIfUserExists(sender, registeredUsers))
+                        {
+
+                            // logger
+                            log.Info("User displaying messages sent by a specific user");
+
+                            // collect messages from a specific user
+                            IEnumerable<Message> results =
+                                 messages.Where(currMsg => (currMsg.GetGroupID()).Equals(groupId) &&
+                                                            (currMsg.GetUserName()).Equals(nickname));
+
+                            // into list
+                            List<Message> msgFromUser = new List<Message>();
+                            foreach (Message currMsg in results)
+                            {
+                                msgFromUser.Add(currMsg);
+                            }
+                            return msgFromUser;
+                        }
+                        else
+                        {
+                            // logger
+                            log.Error("The user tried to display messages from a non-registered user");
+
+                            throw new ArgumentException("Error - user isn't registered to chatroom");
+                        }
+                    }
+                    else
+                        throw new ArgumentException("Illegal groupID - only numbers allowed");
+                }
+                else
+                    throw new ArgumentException("Don't forget to enter all user details");
+            }
+
+
+            private Boolean CheckIfUserExists(User user, List<User> registeredUsers)
+            {
+                // go over users list and check if the requested user exists
+                foreach (User currUser in registeredUsers)
+                {
+                    if ((currUser.GetNickname()).Equals(user.GetNickname()) &&
+                        (currUser.GetGroupId()).Equals(user.GetGroupId()))
+                        return true;
+                }
+                return false;
+            }
+
+        }
     }
 }
+

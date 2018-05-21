@@ -11,13 +11,14 @@ C:\Nofar\ISE182_project23\MileStone2\obj\Release\MileStone2.csproj.CoreCompileIn
 C:\Nofar\ISE182_project23\MileStone2\obj\Release\MileStone2.exe
 C:\Nofar\ISE182_project23\MileStone2\obj\Release\MileStone2.pdb
 C:\Nofar\ISE182_project23\MileStone2\obj\Release\PresentationLayer\FirstWindow.g.cs
-C:\Nofar\ISE182_project23\MileStone2\obj\Release\PresentationLayer\ChatWindow.g.cs
 C:\Nofar\ISE182_project23\MileStone2\bin\Release\log4net.dll
 C:\Nofar\ISE182_project23\MileStone2\bin\Release\Newtonsoft.Json.dll
 C:\Nofar\ISE182_project23\MileStone2\bin\Release\log4net.xml
 C:\Nofar\ISE182_project23\MileStone2\bin\Release\Newtonsoft.Json.xml
 C:\Nofar\ISE182_project23\MileStone2\obj\Release\PresentationLayer\FirstWindow.baml
-C:\Nofar\ISE182_project23\MileStone2\obj\Release\PresentationLayer\ChatWindow.baml
 C:\Nofar\ISE182_project23\MileStone2\obj\Release\MileStone2.csproj.CopyComplete
 C:\Nofar\ISE182_project23\MileStone2\bin\Release\Gu.Wpf.Adorners.dll
 C:\Nofar\ISE182_project23\MileStone2\bin\Release\Gu.Wpf.Adorners.xml
+C:\Nofar\ISE182_project23\MileStone2\obj\Release\PresentationLayer\ChatRoomWindow.g.cs
+C:\Nofar\ISE182_project23\MileStone2\obj\Release\PresentationLayer\ChatRoomWindow.baml
+C:\Nofar\ISE182_project23\MileStone2\obj\Release\MileStone2.csprojResolveAssemblyReference.cache

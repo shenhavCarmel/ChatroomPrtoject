@@ -10,10 +10,11 @@ namespace MileStone1
 {
     class Start
     {
+        /*
         static void Main(string[] args)
         {   
             PresentationLayer.GUI start = new PresentationLayer.GUI();
            
-        }
+        }*/
     }
 }

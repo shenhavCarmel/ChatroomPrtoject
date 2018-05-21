@@ -1,0 +1,15 @@
+C:\Nofar\ISE182_project23\MileStone1\bin\Release\log4net.config
+C:\Nofar\ISE182_project23\MileStone1\bin\Release\MileStone1.exe.config
+C:\Nofar\ISE182_project23\MileStone1\bin\Release\MileStone1.exe
+C:\Nofar\ISE182_project23\MileStone1\bin\Release\MileStone1.pdb
+C:\Nofar\ISE182_project23\MileStone1\bin\Release\log4net.dll
+C:\Nofar\ISE182_project23\MileStone1\bin\Release\Newtonsoft.Json.dll
+C:\Nofar\ISE182_project23\MileStone1\bin\Release\log4net.xml
+C:\Nofar\ISE182_project23\MileStone1\bin\Release\Newtonsoft.Json.xml
+C:\Nofar\ISE182_project23\MileStone1\obj\Release\App.g.cs
+C:\Nofar\ISE182_project23\MileStone1\obj\Release\MileStone1_MarkupCompile.cache
+C:\Nofar\ISE182_project23\MileStone1\obj\Release\MileStone1.csproj.CoreCompileInputs.cache
+C:\Nofar\ISE182_project23\MileStone1\obj\Release\MileStone1.csproj.CopyComplete
+C:\Nofar\ISE182_project23\MileStone1\obj\Release\MileStone1.exe
+C:\Nofar\ISE182_project23\MileStone1\obj\Release\MileStone1.pdb
+C:\Nofar\ISE182_project23\MileStone1\obj\Release\MileStone1.csprojResolveAssemblyReference.cache

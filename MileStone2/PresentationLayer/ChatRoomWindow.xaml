@@ -1,0 +1,52 @@
+﻿<Window x:Class="MileStone2.PresentationLayer.ChatRoomWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MileStone2.PresentationLayer"
+        mc:Ignorable="d"
+        Title="ChatRoomWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Pics/background.jpg"/>
+        </Grid.Background>
+        <TextBox x:Name="txtMsgBody"  Text="{Binding MsgBody, Mode=TwoWay}" HorizontalAlignment="Left" Height="40" Margin="310,338,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="369" AutomationProperties.HelpText="write a message" KeyDown="txtMsgBody_KeyDown"/>
+        <Button x:Name="btnSend" Content="SEND" HorizontalAlignment="Left" Margin="694,338,0,0" VerticalAlignment="Top" Width="78" Height="40" Click="btnSend_Click" RenderTransformOrigin="0.514,2.188"/>
+        <ComboBox x:Name="cbSortType" HorizontalAlignment="Left" Margin="37,83,0,0" VerticalAlignment="Top" Width="251" SelectionChanged="cbSortType_SelectionChanged">
+            <ComboBoxItem IsSelected="{Binding Path=SorterType[0]}" Content="Timestamp"/>
+            <ComboBoxItem IsSelected="{Binding Path=SorterType[1]}" Content="Nickname"/>
+            <ComboBoxItem IsSelected="{Binding Path=SorterType[2]}" Content="Group ID, Nickname and Timestamp"/>
+        </ComboBox>
+        <RadioButton IsChecked="{Binding Path=SorterMode[0], Mode=TwoWay}" x:Name="rdnAccending" Content="Accending" HorizontalAlignment="Left" Margin="36,124,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <RadioButton IsChecked="{Binding Path=SorterMode[1], Mode=TwoWay}" x:Name="rdnDeccending" Content="Deccending" HorizontalAlignment="Left" Margin="37,144,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <ComboBox x:Name="cbFilterType" HorizontalAlignment="Left" Margin="36,203,0,0" VerticalAlignment="Top" Width="160" SelectionChanged="cbFilterType_SelectionChanged">
+            <ComboBoxItem IsSelected="{Binding Path=FilterType[0], Mode=TwoWay}" Content="Group"/>
+            <ComboBoxItem IsSelected="{Binding Path=FilterType[1], Mode=TwoWay}" Content="User"/>
+            <ComboBoxItem IsSelected="{Binding Path=FilterType[2], Mode=TwoWay}" Content="None"/>
+        </ComboBox>
+
+        <Button x:Name="btnFilter" Content="Filter" HorizontalAlignment="Left" Margin="208,237,0,0" VerticalAlignment="Top" Width="80" Click="btnFilter_Click" Height="57" FontSize="18"/>
+        <TextBox x:Name="txtEnterUser" IsEnabled="{Binding NicknameFilterEnabled, Mode=OneWay}" Text="{Binding FilterNickname, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="115,237,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" TextChanged="txtEnterUser_TextChanged"/>
+        <TextBlock HorizontalAlignment="Left" Margin="36,58,0,0" TextWrapping="Wrap" Text="Sort Type" VerticalAlignment="Top" Width="98" Height="20" FontSize="16" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Left" Margin="36,178,0,0" TextWrapping="Wrap" Text="Filter Type" VerticalAlignment="Top" Height="20" Width="109" FontSize="16" Foreground="White"/>
+        <TextBox x:Name="txtEnterGroupID" IsEnabled="{Binding GroupIDFilterEnabled, Mode=OneWay}" Text="{Binding FilterGroupId, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="115,268,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" TextChanged="TextBox_TextChanged"/>
+        <ListBox x:Name="txtDisplayMsgs" ItemsSource="{Binding DisplayedMsgs}" HorizontalAlignment="Left" Height="262" Margin="310,58,0,0" VerticalAlignment="Top" Width="462" Background="#FFCDD6E8" BorderBrush="Black" Padding="0,5" UseLayoutRounding="False" Opacity="0.9"/>
+        <Label Content="Nickname:" HorizontalAlignment="Left" Height="23" Margin="37,237,0,0" VerticalAlignment="Top" Width="76" Foreground="White"/>
+        <Label Content="Group ID:" HorizontalAlignment="Left" Height="23" Margin="37,265,0,0" VerticalAlignment="Top" Width="76" Foreground="White"/>
+        <Button x:Name="btnLogOut" Content="LOGOUT" HorizontalAlignment="Left" Margin="36,338,0,0" VerticalAlignment="Top" Width="75" Click="btnLogOut_Click" RenderTransformOrigin="-3.707,10.575" Height="40"/>
+        <Label Content="" HorizontalAlignment="Left" Height="105" Margin="196,127,0,0" VerticalAlignment="Top" Width="102" Opacity="0.6">
+            <Label.Background>
+                <ImageBrush ImageSource="Pics/pandaHi2.png"/>
+            </Label.Background>
+        </Label>
+        <Label Content="MileStone2 ChatRoom - By Group 23" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="792" Opacity="0.75" FontStyle="Italic">
+            <Label.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFAFB2DA"/>
+                    <GradientStop Color="#FF5F6391" Offset="0.674"/>
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+        <Label Content="what's on your mind?" HorizontalAlignment="Left" Height="37" Margin="146,343,0,0" VerticalAlignment="Top" Width="173" Foreground="#FFA3A5A8" FontSize="16" Opacity="0.9"/>
+    </Grid>
+</Window>

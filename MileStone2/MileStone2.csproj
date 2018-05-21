@@ -78,18 +78,19 @@
     <Compile Include="LogicLayer\ChatRoom.cs" />
     <Compile Include="LogicLayer\Message.cs" />
     <Compile Include="LogicLayer\User.cs" />
+    <Compile Include="PresentationLayer\ActionListener.cs" />
     <Compile Include="PresentationLayer\FirstWindow.xaml.cs">
       <DependentUpon>FirstWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="PresentationLayer\ChatWindow.xaml">
+    <Page Include="PresentationLayer\ChatRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PresentationLayer\ChatWindow.xaml.cs">
-      <DependentUpon>ChatWindow.xaml</DependentUpon>
+    <Compile Include="PresentationLayer\ChatRoomWindow.xaml.cs">
+      <DependentUpon>ChatRoomWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -117,6 +118,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="PresentationLayer\Pics\background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="PresentationLayer\Pics\startBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="PresentationLayer\Pics\pandaHi2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

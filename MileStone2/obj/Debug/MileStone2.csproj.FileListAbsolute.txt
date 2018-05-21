@@ -2,11 +2,9 @@ C:\Nofar\ISE182_project23\MileStone2\bin\Debug\MileStone2.exe.config
 C:\Nofar\ISE182_project23\MileStone2\bin\Debug\MileStone2.exe
 C:\Nofar\ISE182_project23\MileStone2\bin\Debug\MileStone2.pdb
 C:\Nofar\ISE182_project23\MileStone2\obj\Debug\MileStone2.csprojResolveAssemblyReference.cache
-C:\Nofar\ISE182_project23\MileStone2\obj\Debug\FirstWindow.g.cs
 C:\Nofar\ISE182_project23\MileStone2\obj\Debug\App.g.cs
 C:\Nofar\ISE182_project23\MileStone2\obj\Debug\MileStone2_MarkupCompile.cache
 C:\Nofar\ISE182_project23\MileStone2\obj\Debug\MileStone2_MarkupCompile.lref
-C:\Nofar\ISE182_project23\MileStone2\obj\Debug\FirstWindow.baml
 C:\Nofar\ISE182_project23\MileStone2\obj\Debug\MileStone2.g.resources
 C:\Nofar\ISE182_project23\MileStone2\obj\Debug\MileStone2.Properties.Resources.resources
 C:\Nofar\ISE182_project23\MileStone2\obj\Debug\MileStone2.csproj.GenerateResource.cache
@@ -35,3 +33,14 @@ C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנד
 C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\obj\Debug\Milestone2.csproj.CopyComplete
 C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\obj\Debug\MileStone2.exe
 C:\Users\Noy Ezra\Desktop\נוי לימודים\סמסטר ב'\מבוא להנדסת תוכנה\ISE182_project23\Milestone2\obj\Debug\MileStone2.pdb
+C:\Nofar\ISE182_project23\MileStone2\bin\Debug\Gu.Wpf.Adorners.dll
+C:\Nofar\ISE182_project23\MileStone2\bin\Debug\log4net.dll
+C:\Nofar\ISE182_project23\MileStone2\bin\Debug\Newtonsoft.Json.dll
+C:\Nofar\ISE182_project23\MileStone2\bin\Debug\Gu.Wpf.Adorners.xml
+C:\Nofar\ISE182_project23\MileStone2\bin\Debug\log4net.xml
+C:\Nofar\ISE182_project23\MileStone2\bin\Debug\Newtonsoft.Json.xml
+C:\Nofar\ISE182_project23\MileStone2\obj\Debug\PresentationLayer\FirstWindow.g.cs
+C:\Nofar\ISE182_project23\MileStone2\obj\Debug\PresentationLayer\ChatRoomWindow.g.cs
+C:\Nofar\ISE182_project23\MileStone2\obj\Debug\PresentationLayer\FirstWindow.baml
+C:\Nofar\ISE182_project23\MileStone2\obj\Debug\PresentationLayer\ChatRoomWindow.baml
+C:\Nofar\ISE182_project23\MileStone2\obj\Debug\MileStone2.csproj.CopyComplete
