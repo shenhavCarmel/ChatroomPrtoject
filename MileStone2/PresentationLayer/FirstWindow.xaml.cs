@@ -31,7 +31,7 @@ namespace MileStone2.PresentationLayer
             InitializeComponent();
             _chatBinder = new ActionListener();
             this.DataContext = _chatBinder;
-            this.chatR = new ChatRoom(_chatBinder);
+            this.chatR = new ChatRoom(/*_chatBinder*/);
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
@@ -64,7 +64,7 @@ namespace MileStone2.PresentationLayer
             {
 
                 // switch to the next window
-                ChatRoomWindow chatWindow = new ChatRoomWindow(chatR, _chatBinder);
+                ChatRoomWindow chatWindow = new ChatRoomWindow(chatR/*, _chatBinder*/);
                 this.Close();
                 chatWindow.ShowDialog();
             }
