@@ -31,8 +31,11 @@ namespace MileStone2.LogicLayer
         {
             _msgHandler = new MessageHandler();
             _userHandler = new UserHandler();
+
+            // set the object observer
             _chatBinder = binder;
 
+            // set sorter and filter
             _sorter = new Sorter(_chatBinder.SelectedModeAscending, _chatBinder.SelectedTypeSorterIndex);
             _filter = new Filter(_chatBinder.SelectedTypeFilterIndex);
 
@@ -41,7 +44,7 @@ namespace MileStone2.LogicLayer
             _currDisplayedMsgs = new List<Message>();
             _currDisplayedMsgs.AddRange(_messages);
 
-            _registeredUsers = _userHandler.GetUsersList().ToList();
+            _registeredUsers = _userHandler.GetUsersList();
 
             _loggedInUser = null;
         }
@@ -83,6 +86,7 @@ namespace MileStone2.LogicLayer
 
         public Boolean Register(String nickname, string groupId)
         {
+            // check if arguments are valid
             if ((nickname == null || nickname.Equals("")) | (groupId == null || groupId.Equals("")))
             {
                 return false;
@@ -147,34 +151,37 @@ namespace MileStone2.LogicLayer
                     try
                     {
                         groupID = int.Parse(msg.GetGroupID());
+
                         // check if the list of messages already contains message with the same guid
                         if (!(_messages.Exists(e => e.GetId().Equals(currMsg.Id))))
                         {
                             _messages.Add(msg);
                         }
 
-
-                        if ((_registeredUsers == null) || (!(_registeredUsers.Exists(e => e.GetNickname().Equals(msg.GetUserName()) & 
+                        // check if the users from the messages are in the registered users list
+                        if ((_registeredUsers == null) || (!(_registeredUsers.Exists(e => e.GetNickname().Equals(msg.GetUserName()) &
                                                             !(_registeredUsers.Exists(x => x.GetGroupId().Equals(msg.GetGroupID())))))))
                         {
-                                User newUser = new User(msg.GetUserName(), msg.GetGroupID());
-                                _userHandler.SaveUser(newUser);
-                                _registeredUsers.Add(newUser);
+                            // add the existing users
+                            User newUser = new User(msg.GetUserName(), msg.GetGroupID());
+                            _userHandler.SaveUser(newUser);
+                            _registeredUsers.Add(newUser);
                         }
                     }
                     catch
                     {
-                        
+
                     }
 
                 }
 
                 // add to presistent
                 _msgHandler.SaveMessageList(_messages);
-                
+
                 List<Message> selectedMsgs = new List<Message>();
                 try
                 {
+                    // filter & sort the relevant messages
                     selectedMsgs.AddRange(_filter.runFilter(_messages, _registeredUsers,
                                                         _chatBinder.FilterGroupId, _chatBinder.FilterNickname));
                     _currDisplayedMsgs = _sorter.runSort(selectedMsgs);
@@ -183,7 +190,7 @@ namespace MileStone2.LogicLayer
                 {
                     throw e;
                 }
-                
+
                 // logger
                 log.Info("Chatroom retrieved 10 messages from server");
 
@@ -192,7 +199,7 @@ namespace MileStone2.LogicLayer
             catch
             {
                 // logger
-                log.Error("Retrieval messages from sercer failed");
+                log.Error("Retrieval messages from server failed");
 
                 return false;
             }
@@ -242,22 +249,32 @@ namespace MileStone2.LogicLayer
 
         public List<Message> Sort()
         {
+            // sort the relevant messages according to settings
             _sorter.setSortingType(_chatBinder.SelectedTypeSorterIndex);
             _sorter.setAscending(_chatBinder.SorterMode[0]);
+
+            // logger
+            log.Info("Messages in chat room where sorted by user preferences");
             return _sorter.runSort(_currDisplayedMsgs);
         }
 
         public void FilterMsgs()
         {
-            
+            // set filter type
             _filter.setFilteringType(_chatBinder.SelectedTypeFilterIndex);
             try
             {
-                _currDisplayedMsgs = _filter.runFilter(_messages, _registeredUsers, 
+                // run the filter
+                _currDisplayedMsgs = _filter.runFilter(_messages, _registeredUsers,
                                          _chatBinder.FilterGroupId, _chatBinder.FilterNickname);
+
+                // logger
+                log.Info("Filtering process succeed");
             }
             catch (Exception e)
             {
+                // logger
+                log.Error("Filtering process failed- " + e.Message);
                 throw e;
             }
         }
@@ -290,6 +307,7 @@ namespace MileStone2.LogicLayer
             {
                 List<Message> msgs = new List<Message>();
 
+                // execute sort according to settings (type and mode)
                 switch (_sortingType)
                 {
                     case TIME_STAMP:
@@ -356,6 +374,7 @@ namespace MileStone2.LogicLayer
             {
                 List<Message> msg = new List<Message>();
 
+                // execute filter according to settings (type)
                 switch (_filteringType)
                 {
                     case GROUP:
@@ -377,7 +396,7 @@ namespace MileStone2.LogicLayer
                         catch (Exception e)
                         {
                             throw e;
-                        } 
+                        }
                         break;
 
                     case NONE:
@@ -392,8 +411,9 @@ namespace MileStone2.LogicLayer
 
             public List<Message> DisplayMsgByGroupId(String groupId, List<User> registeredUsers, List<Message> messages)
             {
-          
-                if (!groupId.Equals("")) {
+
+                if (!groupId.Equals(""))
+                {
 
                     int group;
 
@@ -464,7 +484,6 @@ namespace MileStone2.LogicLayer
                 else
                     throw new ArgumentException("Don't forget to enter all user details");
             }
-            
 
             private Boolean CheckIfUserExists(User user, List<User> registeredUsers)
             {

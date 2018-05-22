@@ -12,27 +12,26 @@ namespace ChatRoom.UnitTest
 
         MileStone2.LogicLayer.ChatRoom x;
 
-
         [SetUp]
         public void SetupTests()
-        {
+        { 
             x = new MileStone2.LogicLayer.ChatRoom(new MileStone2.PresentationLayer.ActionListener());
         }
- 
-        // checked
+        
+        // check if the function "CheckIfUserExists" is correct
         [Test]
         public void CheckIfUserExists_RegisteredUser_True()
         {
-            if (x.GetRegisteredUsers() != null)
+            if (x.GetRegisteredUsers() != null & x.GetRegisteredUsers().Count > 0)
             {
-                MileStone2.LogicLayer.User us = x.GetRegisteredUsers()[1];
+                MileStone2.LogicLayer.User us = x.GetRegisteredUsers()[0];
                 bool ans = x.CheckIfUserExists(us);
                 Assert.IsTrue(ans);
             }
             Assert.Pass();
         }
 
-        // checked
+        // check if the function "Sort" is correct 
         [Test]
         public void SortedMsgs_TimeStampSort_True()
         {
@@ -50,7 +49,7 @@ namespace ChatRoom.UnitTest
             Assert.IsTrue(isSorted);
         }
 
-        // checked
+        // check if the function
         [Test]
         public void Filter_FilterByGroupID_true()
         {
@@ -59,10 +58,10 @@ namespace ChatRoom.UnitTest
             List<MileStone2.LogicLayer.Message> msgs = x.GetFilter().runFilter(x.GetMessagesInChat()
                 , us, us[0].GetGroupId(), us[0].GetNickname());
             Boolean isFiltered = true;
-            String groupID = msgs[0].GetGroupID();
-            foreach(MileStone2.LogicLayer.Message msg in msgs)
+            String groupID = us[0].GetGroupId();
+            foreach (MileStone2.LogicLayer.Message currMsg in msgs)
             {
-                if (!(msg.GetGroupID() == groupID) & isFiltered)
+                if ((currMsg.GetGroupID() != groupID) & isFiltered)
                 {
                     isFiltered = false;
                 }
@@ -78,7 +77,7 @@ namespace ChatRoom.UnitTest
             List<MileStone2.LogicLayer.Message> msgs = x.GetFilter().runFilter(x.GetMessagesInChat()
                 , us, us[0].GetGroupId(), us[0].GetNickname());
             Boolean isFiltered = true;
-            String nickName = msgs[0].GetUserName();
+            String nickName = us[0].GetNickname();
             foreach (MileStone2.LogicLayer.Message msg in msgs)
             {
                 if (!(msg.GetUserName() == nickName) & isFiltered)

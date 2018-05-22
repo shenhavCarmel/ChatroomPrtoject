@@ -60,6 +60,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MileStone1\MileStone1.csproj">
+      <Project>{72d07e80-983d-4795-958f-d95cc0c2c4a2}</Project>
+      <Name>MileStone1</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MileStone2\MileStone2.csproj">
       <Project>{34351864-a291-4092-a7f5-236aff50ece0}</Project>
       <Name>MileStone2</Name>

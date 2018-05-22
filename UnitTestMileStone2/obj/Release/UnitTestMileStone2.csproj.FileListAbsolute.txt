@@ -27,3 +27,7 @@ C:\Nofar\ISE182_project23\UnitTestMileStone2\bin\Release\log4net.xml
 C:\Nofar\ISE182_project23\UnitTestMileStone2\obj\Release\UnitTestMileStone2.csproj.CopyComplete
 C:\Nofar\ISE182_project23\UnitTestMileStone2\obj\Release\UnitTestMileStone2.dll
 C:\Nofar\ISE182_project23\UnitTestMileStone2\obj\Release\UnitTestMileStone2.pdb
+C:\Nofar\ISE182_project23\UnitTestMileStone2\bin\Release\log4net.config
+C:\Nofar\ISE182_project23\UnitTestMileStone2\bin\Release\MileStone1.exe
+C:\Nofar\ISE182_project23\UnitTestMileStone2\bin\Release\MileStone1.pdb
+C:\Nofar\ISE182_project23\UnitTestMileStone2\bin\Release\MileStone1.exe.config

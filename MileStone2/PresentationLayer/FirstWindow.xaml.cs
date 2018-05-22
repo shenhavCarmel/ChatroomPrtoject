@@ -38,6 +38,7 @@ namespace MileStone2.PresentationLayer
             String strNickname = _chatBinder.StartNickname;
             String strGroupID = _chatBinder.StartGroupId;
 
+            // if user details are valid, register
             if (CheckValidGroupId(strGroupID) && this.chatR.Register(strNickname, strGroupID))
             {
                 MessageBox.Show("Registerd succesfully");
@@ -59,6 +60,7 @@ namespace MileStone2.PresentationLayer
             string nickName = _chatBinder.StartNickname;
             string groupID = _chatBinder.StartGroupId;
 
+            // if the user is valid, login
             if (chatR.Login(nickName, groupID))
             {
 
