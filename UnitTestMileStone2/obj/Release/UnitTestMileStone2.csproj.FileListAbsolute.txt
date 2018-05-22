@@ -1,0 +1,2 @@
+C:\Users\Win10\Desktop\ISE182_project23\UnitTestMileStone2\obj\Release\UnitTestMileStone2.csprojResolveAssemblyReference.cache
+C:\Users\Win10\Desktop\ISE182_project23\UnitTestMileStone2\obj\Release\UnitTestMileStone2.csproj.CoreCompileInputs.cache
