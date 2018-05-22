@@ -49,7 +49,7 @@ namespace ChatRoom.UnitTest
             Assert.IsTrue(isSorted);
         }
 
-        // check if the function
+        // check if the function "runFilter" is correct when filtering by group id
         [Test]
         public void Filter_FilterByGroupID_true()
         {
@@ -69,6 +69,7 @@ namespace ChatRoom.UnitTest
             Assert.IsTrue(isFiltered);
         }
 
+        // check if the function "runFilter" is correct when filtering by nickname
         [Test]
         public void Filter_FilterByNickName_true()
         {
