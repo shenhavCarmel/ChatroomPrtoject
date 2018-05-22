@@ -22,3 +22,12 @@ C:\Nofar\ISE182_project23\MileStone2\bin\Release\Gu.Wpf.Adorners.xml
 C:\Nofar\ISE182_project23\MileStone2\obj\Release\PresentationLayer\ChatRoomWindow.g.cs
 C:\Nofar\ISE182_project23\MileStone2\obj\Release\PresentationLayer\ChatRoomWindow.baml
 C:\Nofar\ISE182_project23\MileStone2\obj\Release\MileStone2.csprojResolveAssemblyReference.cache
+C:\Nofar\ISE182_project23\MileStone2\bin\Release\NUnit3.TestAdapter.dll
+C:\Nofar\ISE182_project23\MileStone2\bin\Release\NUnit3.TestAdapter.pdb
+C:\Nofar\ISE182_project23\MileStone2\bin\Release\nunit.engine.dll
+C:\Nofar\ISE182_project23\MileStone2\bin\Release\nunit.engine.api.dll
+C:\Nofar\ISE182_project23\MileStone2\bin\Release\Mono.Cecil.dll
+C:\Nofar\ISE182_project23\MileStone2\bin\Release\nunit.framework.dll
+C:\Nofar\ISE182_project23\MileStone2\bin\Release\nunit.framework.pdb
+C:\Nofar\ISE182_project23\MileStone2\bin\Release\nunit.framework.xml
+C:\Nofar\ISE182_project23\MileStone2\obj\Release\MileStone2_Content.g.cs

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MileStone1", "MileStone1\Mi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MileStone2", "MileStone2\MileStone2.csproj", "{72E02C8A-03E6-4D90-B221-4BFEA1EFF05A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestMileStone2", "UnitTestMileStone2\UnitTestMileStone2.csproj", "{881128DA-AB9A-40F2-B664-0FB1E65D5BE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{72E02C8A-03E6-4D90-B221-4BFEA1EFF05A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72E02C8A-03E6-4D90-B221-4BFEA1EFF05A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72E02C8A-03E6-4D90-B221-4BFEA1EFF05A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{881128DA-AB9A-40F2-B664-0FB1E65D5BE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{881128DA-AB9A-40F2-B664-0FB1E65D5BE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{881128DA-AB9A-40F2-B664-0FB1E65D5BE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{881128DA-AB9A-40F2-B664-0FB1E65D5BE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

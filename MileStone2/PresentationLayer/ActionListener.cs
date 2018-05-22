@@ -84,22 +84,8 @@ namespace MileStone2.PresentationLayer
             }
         }
 
+        // Bind the message display in the chat
         public ObservableCollection<string> DisplayedMsgs { get; } = new ObservableCollection<string>();
-
-        /*
-        private string _displayedMsgs = "";
-        public string DisplayedMsgs
-        {
-            get
-            {
-                return _displayedMsgs;
-            }
-            set
-            {
-                _displayedMsgs = value;
-                OnPropertyChanged("DisplayedMsgs");
-            }
-        }*/
 
         private string _filterNickname = "";
         public string FilterNickname
@@ -129,6 +115,8 @@ namespace MileStone2.PresentationLayer
             }
         }
 
+
+
         private bool[] _sorterMode = new bool[] {true, false};
         public bool[] SorterMode
         {
@@ -146,8 +134,6 @@ namespace MileStone2.PresentationLayer
         }
         public int SelectedTypeSorterIndex
         {
-            //get { return Array.IndexOf(_sorterType, true); }
-
             get
             {
                 for (int i = 0; i < _sorterType.Length; i++)
@@ -167,7 +153,6 @@ namespace MileStone2.PresentationLayer
         }
         public int SelectedTypeFilterIndex
         {
-            //get { return Array.IndexOf(_filterType, true); }
 
             get
             {

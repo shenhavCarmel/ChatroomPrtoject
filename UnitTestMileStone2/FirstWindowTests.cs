@@ -31,9 +31,9 @@ namespace ChatRoom.UnitTest
         [Test]
         public void Register_UserAlreadyExists_False()
         {
-            if (x.getRegisteredUsers() != null)
+            if (x.GetRegisteredUsers() != null)
             {
-                MileStone2.LogicLayer.User us = x.getRegisteredUsers()[0];
+                MileStone2.LogicLayer.User us = x.GetRegisteredUsers()[0];
                 bool ans = x.Register(us.GetNickname(), us.GetGroupId());
                 Assert.IsFalse(ans);
             }
@@ -52,9 +52,9 @@ namespace ChatRoom.UnitTest
         [Test]
         public void login_UserIsRegistred_true()
         {
-            if (x.getRegisteredUsers() != null)
+            if (x.GetRegisteredUsers() != null)
             {
-                MileStone2.LogicLayer.User us = x.getRegisteredUsers()[1];
+                MileStone2.LogicLayer.User us = x.GetRegisteredUsers()[1];
                 bool result = x.Login(us.GetNickname(), us.GetGroupId());
                 Assert.IsTrue(result);
             }

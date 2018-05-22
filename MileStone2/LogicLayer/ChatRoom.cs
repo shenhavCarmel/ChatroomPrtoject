@@ -37,8 +37,7 @@ namespace MileStone2.LogicLayer
             _filter = new Filter(_chatBinder.SelectedTypeFilterIndex);
 
             // load users' and messages' data from files
-            _messages = _msgHandler.GetMessagesList().ToList();
-            RetrieveMsg();
+            _messages = _msgHandler.GetMessagesList();
             _currDisplayedMsgs = new List<Message>();
             _currDisplayedMsgs.AddRange(_messages);
 
@@ -47,6 +46,10 @@ namespace MileStone2.LogicLayer
             _loggedInUser = null;
         }
 
+        public List<User> GetRegisteredUsers()
+        {
+            return _registeredUsers;
+        }
         public List<Message> GetMessagesInChat()
         {
             return Sort();
@@ -80,30 +83,45 @@ namespace MileStone2.LogicLayer
 
         public Boolean Register(String nickname, string groupId)
         {
-            User userToRegister = new User(nickname, groupId);
-
-            if (!CheckIfUserExists(userToRegister))
+            if ((nickname == null || nickname.Equals("")) | (groupId == null || groupId.Equals("")))
             {
-                _registeredUsers.Add(userToRegister);
-
-                // register him to the chat room --> add to files
-                _userHandler.SaveUser(userToRegister);
-
-                // logger
-                log.Info("A new user registered");
-                return true;
+                return false;
             }
             else
             {
-                // logger
-                log.Error("An existing user tried to register again");
+                User userToRegister = new User(nickname, groupId);
 
-                return false;
+                if (!CheckIfUserExists(userToRegister))
+                {
+                    _registeredUsers.Add(userToRegister);
+
+                    // register him to the chat room --> add to files
+                    _userHandler.SaveUser(userToRegister);
+
+                    // logger
+                    log.Info("A new user registered");
+                    return true;
+                }
+                else
+                {
+                    // logger
+                    log.Error("An existing user tried to register again");
+
+                    return false;
+                }
             }
-
         }
 
-        private Boolean CheckIfUserExists(User user)
+        public Filter GetFilter()
+        {
+            return this._filter;
+        }
+        public Sorter GetSorter()
+        {
+            return _sorter;
+        }
+
+        public Boolean CheckIfUserExists(User user)
         {
             // go over users list and check if the requested user exists
             foreach (User currUser in _registeredUsers)
@@ -244,7 +262,7 @@ namespace MileStone2.LogicLayer
             }
         }
 
-        private class Sorter
+        public class Sorter
         {
             private Boolean _ascending;
             private const int TIME_STAMP = 0;
@@ -446,7 +464,7 @@ namespace MileStone2.LogicLayer
                 else
                     throw new ArgumentException("Don't forget to enter all user details");
             }
-
+            
 
             private Boolean CheckIfUserExists(User user, List<User> registeredUsers)
             {

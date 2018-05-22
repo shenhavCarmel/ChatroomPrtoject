@@ -26,7 +26,7 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <Button x:Name="btnExit" Content="Exit" HorizontalAlignment="Left" Margin="423,300,0,0" VerticalAlignment="Top" Width="53" Click="btnExit_Click" RenderTransformOrigin="1.987,-0.6"/>
+        <Button x:Name="btnExit" Content="Exit" HorizontalAlignment="Left" Margin="226,300,0,0" VerticalAlignment="Top" Width="99" Click="btnExit_Click" RenderTransformOrigin="1.987,-0.6" FontWeight="Bold"/>
         <Label x:Name="lblEnterNickname" Content="Nickname" HorizontalAlignment="Left" Margin="58,149,0,0" VerticalAlignment="Top" Width="106" Height="35" Foreground="White" FontSize="20"/>
         <Label x:Name="lblEnterGroupID" Content="Group ID" HorizontalAlignment="Left" Margin="57,194,0,0" VerticalAlignment="Top" Width="93" Foreground="White" FontSize="20"/>
         <TextBox x:Name="tbNickname" Text="{Binding StartNickname, Mode=TwoWay}" HorizontalAlignment="Left" Height="25" Margin="168,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188"/>

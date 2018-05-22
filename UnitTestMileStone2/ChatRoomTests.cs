@@ -26,7 +26,7 @@ namespace ChatRoom.UnitTest
             if (x.GetRegisteredUsers() != null)
             {
                 MileStone2.LogicLayer.User us = x.GetRegisteredUsers()[1];
-                bool ans = x.CheckIfUserExists(us, x.GetRegisteredUsers());
+                bool ans = x.CheckIfUserExists(us);
                 Assert.IsTrue(ans);
             }
             Assert.Pass();

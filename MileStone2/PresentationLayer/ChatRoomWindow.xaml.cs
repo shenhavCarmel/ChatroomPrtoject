@@ -37,10 +37,25 @@ namespace MileStone2.PresentationLayer
             
         }
 
+        private void UpdateScrollBar(ListBox listBox)
+        {
+            if (listBox != null)
+            {
+                var border = (Border)VisualTreeHelper.GetChild(listBox, 0);
+                var scrollViewer = (ScrollViewer)VisualTreeHelper.GetChild(border, 0);
+                scrollViewer.ScrollToBottom();
+            }
+
+        }
+
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             try
             {
+                // check if a new message was added to the list box
+                int numOfMsg = _chatBinder.DisplayedMsgs.Count;
+
+                // retrieve & display
                 _chatRoom.RetrieveMsg();
                 _chatBinder.DisplayedMsgs.Clear();
 
@@ -48,9 +63,14 @@ namespace MileStone2.PresentationLayer
                 {
                     _chatBinder.DisplayedMsgs.Add(currMsg.ToString());
 
-                }
+                }  
 
                 _chatBinder.OnPropertyChanged("DisplayedMsgs");
+
+                // check if a new message was added to the list box
+                int numOfNewMsgs = _chatBinder.DisplayedMsgs.Count;
+                if (numOfMsg < numOfNewMsgs)
+                    UpdateScrollBar(lbDisplayMsgs);
             }
             catch (Exception ex)
             {
@@ -139,7 +159,7 @@ namespace MileStone2.PresentationLayer
         {
             if (e.Key.Equals(Key.Enter))
             {
-                txtDisplayMsgs.Focus();
+                lbDisplayMsgs.Focus();
                 txtMsgBody.Focus();
                 btnSend_Click(sender, e);
             }
