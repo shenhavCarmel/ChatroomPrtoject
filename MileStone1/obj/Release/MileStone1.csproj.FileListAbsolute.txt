@@ -12,4 +12,13 @@ C:\Nofar\ISE182_project23\MileStone1\obj\Release\MileStone1.csproj.CoreCompileIn
 C:\Nofar\ISE182_project23\MileStone1\obj\Release\MileStone1.csproj.CopyComplete
 C:\Nofar\ISE182_project23\MileStone1\obj\Release\MileStone1.exe
 C:\Nofar\ISE182_project23\MileStone1\obj\Release\MileStone1.pdb
+C:\Nofar\ISE182_project23\MileStone1\bin\Release\NUnit3.TestAdapter.dll
+C:\Nofar\ISE182_project23\MileStone1\bin\Release\NUnit3.TestAdapter.pdb
+C:\Nofar\ISE182_project23\MileStone1\bin\Release\nunit.engine.dll
+C:\Nofar\ISE182_project23\MileStone1\bin\Release\nunit.engine.api.dll
+C:\Nofar\ISE182_project23\MileStone1\bin\Release\Mono.Cecil.dll
+C:\Nofar\ISE182_project23\MileStone1\bin\Release\nunit.framework.dll
+C:\Nofar\ISE182_project23\MileStone1\bin\Release\nunit.framework.pdb
+C:\Nofar\ISE182_project23\MileStone1\bin\Release\nunit.framework.xml
+C:\Nofar\ISE182_project23\MileStone1\obj\Release\MileStone1_Content.g.cs
 C:\Nofar\ISE182_project23\MileStone1\obj\Release\MileStone1.csprojResolveAssemblyReference.cache
