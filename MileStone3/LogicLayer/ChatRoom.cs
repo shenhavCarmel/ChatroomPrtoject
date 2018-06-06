@@ -39,7 +39,7 @@ namespace MileStone3.LogicLayer
 
             // set sorter and filter
             _sorter = new Sorter(_chatBinder.SelectedModeAscending, _chatBinder.SelectedTypeSorterIndex);
-            _filter = new Filter(_chatBinder.SelectedTypeFilterIndex);
+            _filter = new Filter(_chatBinder.SelectedTypeFilterIndex, _chatBinder.FilterGroupId, _chatBinder.FilterNickname);
 
             // load users' and messages' data from files
             _messages = _msgHandler.GetMessagesList();
@@ -143,7 +143,7 @@ namespace MileStone3.LogicLayer
         {
             try
             {
-                List<Message> retrievedMsg = _queryRunner.getQueryOutput();
+                List<Message> retrievedMsg = _queryRunner.excuteQuery(_filter);
 
                 // add new messages from the server to the list of messages
                 foreach (Message currMsg in retrievedMsg)
@@ -359,15 +359,43 @@ namespace MileStone3.LogicLayer
             private const int USER = 1;
             private const int NONE = 2;
             private int _filteringType;
+            private String _groupId;
+            private String _nickname;
 
-            public Filter(int filteringType)
+            public Filter(int filteringType, String GID, String nickname)
             {
                 _filteringType = filteringType;
+                _groupId = GID;
+                _nickname = nickname;
             }
 
             public void setFilteringType(int filteringType)
             {
                 _filteringType = filteringType;
+            }
+
+            public int getFilterType()
+            {
+                return _filteringType;
+            }
+
+            public String getGroupId()
+            {
+                return _groupId;
+            }
+
+            public void setGroupId(String GID)
+            {
+                _groupId = GID;
+            }
+            public String getNickname()
+            {
+                return _nickname;
+            }
+
+            public void setNickname(String nickName)
+            {
+                _nickname = nickName;
             }
 
             public List<Message> runFilter(List<Message> listToFilter, List<User> registeredUsers,
@@ -381,7 +409,7 @@ namespace MileStone3.LogicLayer
                     case GROUP:
                         try
                         {
-                            msg = DisplayMsgByGroupId(userGroupId, registeredUsers, listToFilter);
+                          //msg = DisplayMsgByGroupId(userGroupId, registeredUsers, listToFilter);
                         }
                         catch (Exception e)
                         {
@@ -392,7 +420,7 @@ namespace MileStone3.LogicLayer
                     case USER:
                         try
                         {
-                            msg = DisplayMsgByUser(userNickname, userGroupId, listToFilter, registeredUsers);
+                            //msg = DisplayMsgByUser(userNickname, userGroupId, listToFilter, registeredUsers);
                         }
                         catch (Exception e)
                         {
@@ -410,95 +438,8 @@ namespace MileStone3.LogicLayer
                 return msg;
             }
 
-            public List<Message> DisplayMsgByGroupId(String groupId, List<User> registeredUsers, List<Message> messages)
-            {
 
-                if (!groupId.Equals(""))
-                {
-
-                    int group;
-
-                    // check if the group id inserted is legal
-                    if (int.TryParse(groupId, out group))
-                    {
-
-                        if (registeredUsers.Any((user) => user.GetGroupId() == groupId))
-                        {
-                            List<Message> msgFromGroup = new List<Message>();
-
-                            foreach (Message currMsg in messages)
-                            {
-                                if (currMsg.GetGroupID().Equals(groupId))
-                                    msgFromGroup.Add(currMsg);
-                            }
-
-                            return msgFromGroup;
-                        }
-                        else
-                            throw new ArgumentException("Group ID is illegal - group isn't registered");
-                    }
-                    else
-                        throw new ArgumentException("Group ID is illegal - only numbers are allowed");
-                }
-                return messages;
-            }
-
-            private List<Message> DisplayMsgByUser(string nickname, string groupId, List<Message> messages, List<User> registeredUsers)
-            {
-                if (!nickname.Equals("") && !groupId.Equals(""))
-                {
-                    int groupIn;
-                    if (int.TryParse(groupId, out groupIn))
-                    {
-                        User sender = new User(nickname, groupId);
-
-                        if (CheckIfUserExists(sender, registeredUsers))
-                        {
-
-                            // logger
-                            log.Info("User displaying messages sent by a specific user");
-
-                            // collect messages from a specific user
-                            IEnumerable<Message> results =
-                                 messages.Where(currMsg => (currMsg.GetGroupID()).Equals(groupId) &&
-                                                            (currMsg.GetUserName()).Equals(nickname));
-
-                            // into list
-                            List<Message> msgFromUser = new List<Message>();
-                            foreach (Message currMsg in results)
-                            {
-                                msgFromUser.Add(currMsg);
-                            }
-                            return msgFromUser;
-                        }
-                        else
-                        {
-                            // logger
-                            log.Error("The user tried to display messages from a non-registered user");
-
-                            throw new ArgumentException("Error - user isn't registered to chatroom");
-                        }
-                    }
-                    else
-                        throw new ArgumentException("Illegal groupID - only numbers allowed");
-                }
-                else
-                    throw new ArgumentException("Don't forget to enter all user details");
-            }
-
-            private Boolean CheckIfUserExists(User user, List<User> registeredUsers)
-            {
-                // go over users list and check if the requested user exists
-                foreach (User currUser in registeredUsers)
-                {
-                    if ((currUser.GetNickname()).Equals(user.GetNickname()) &&
-                        (currUser.GetGroupId()).Equals(user.GetGroupId()))
-                        return true;
-                }
-                return false;
-            }
 
         }
     }
 }
-
