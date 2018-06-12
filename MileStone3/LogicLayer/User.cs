@@ -12,14 +12,16 @@ namespace MileStone3.LogicLayer
         // Fields
         private Boolean _isLoggedIn;
         private String _nickname;
-        private string _groupId;
+        private String _groupId;
+        private String _password;
 
         // Constructors
-        public User(String nickname, string groupId)
+        public User(String nickname, String groupId, String password)
         {
             this._isLoggedIn = false;
             this._nickname = nickname;
             this._groupId = groupId;
+            this._password = password;
         }
 
 
@@ -70,6 +72,11 @@ namespace MileStone3.LogicLayer
         public void SetGroupId(string newGroupId)
         {
             this._groupId = newGroupId;
+        }
+
+        public String getPassword()
+        {
+            return this._password;
         }
     }
 }

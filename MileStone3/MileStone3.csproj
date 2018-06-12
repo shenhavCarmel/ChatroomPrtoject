@@ -71,11 +71,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ConsistentLayer\MessageHandler.cs" />
-    <Compile Include="ConsistentLayer\UserHandler.cs" />
     <Compile Include="DataAccessLayer\QueryRunner.cs" />
     <Compile Include="DataAccessLayer\Query.cs" />
     <Compile Include="LogicLayer\ChatRoom.cs" />
+    <Compile Include="LogicLayer\Hashing.cs" />
     <Compile Include="LogicLayer\Message.cs" />
     <Compile Include="LogicLayer\User.cs" />
     <Page Include="PresentationLayer\ChatRoomWindow.xaml">

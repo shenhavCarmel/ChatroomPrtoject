@@ -28,3 +28,4 @@ C:\Nofar\ISE182_project23\MileStone3\obj\Release\MileStone3.csproj.CoreCompileIn
 C:\Nofar\ISE182_project23\MileStone3\obj\Release\MileStone3.csproj.CopyComplete
 C:\Nofar\ISE182_project23\MileStone3\obj\Release\MileStone3.exe
 C:\Nofar\ISE182_project23\MileStone3\obj\Release\MileStone3.pdb
+C:\Nofar\ISE182_project23\MileStone3\obj\Release\MileStone3.csprojResolveAssemblyReference.cache

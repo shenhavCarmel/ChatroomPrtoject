@@ -146,7 +146,7 @@ namespace MileStone3.PresentationLayer
            {
                 // filter displayed messages according to selected binded fields
                 _chatBinder.DisplayedMsgs.Clear();
-                _chatRoom.FilterMsgs();
+                _chatRoom.RetrieveMsg();
                 foreach (Message currMsg in _chatRoom.GetMessagesInChat())
                 {
                     _chatBinder.DisplayedMsgs.Add(currMsg.ToString());
@@ -220,5 +220,6 @@ namespace MileStone3.PresentationLayer
                     
             }
         }
+
     }
 }

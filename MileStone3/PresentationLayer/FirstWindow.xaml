@@ -10,7 +10,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="Pics/startBackground.jpg"/>
         </Grid.Background>
-        <Button x:Name="btnRegister" Content="Register" HorizontalAlignment="Left" Margin="377,243,0,0" VerticalAlignment="Top" Width="99" Height="27" Click="btnRegister_Click" FontWeight="Bold" FontSize="14"/>
+        <Button x:Name="btnRegister" Content="Register" HorizontalAlignment="Left" Margin="377,264,0,0" VerticalAlignment="Top" Width="99" Height="27" Click="btnRegister_Click" FontWeight="Bold" FontSize="14"/>
         <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Left" Margin="377,158,0,0" VerticalAlignment="Top" Width="99" Height="65" Click="btnLogin_Click" RenderTransformOrigin="-0.576,0.318" FontSize="20" FontWeight="Bold"/>
 
 
@@ -31,13 +31,14 @@
         <Label x:Name="lblEnterGroupID" Content="Group ID" HorizontalAlignment="Left" Margin="57,194,0,0" VerticalAlignment="Top" Width="93" Foreground="White" FontSize="20"/>
         <TextBox x:Name="tbNickname" Text="{Binding StartNickname, Mode=TwoWay}" HorizontalAlignment="Left" Height="25" Margin="168,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188"/>
         <TextBox x:Name="tbGroup" Text="{Binding StartGroupId, Mode=TwoWay}" HorizontalAlignment="Left" Height="25" Margin="168,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188"/>
-        <Label Content="Not registered? Click here" HorizontalAlignment="Left" Margin="168,243,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
+        <Label Content="Not registered? Click here" HorizontalAlignment="Left" Margin="168,264,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
         <Label Content="MileStone        ChatRoom" HorizontalAlignment="Left" Height="69" Margin="79,55,0,0" VerticalAlignment="Top" Width="397" Foreground="#FFE1E8F5" FontSize="48" FontFamily="Gabriola" OpacityMask="Black" FontWeight="Bold">
             <Label.BorderBrush>
                 <SolidColorBrush Color="Black"/>
             </Label.BorderBrush>
         </Label>
         <Label Content="2" HorizontalAlignment="Left" Height="128" Margin="235,-9,0,0" VerticalAlignment="Top" Width="90" Foreground="#FFE1E8F5" FontSize="110" FontFamily="Gabriola" OpacityMask="Black" BorderBrush="Black"/>
+        <Label x:Name="lblEnterPassword" Content="Password" HorizontalAlignment="Left" Margin="58,235,0,0" VerticalAlignment="Top" Width="92" Foreground="#FFF0EFEF" FontSize="20"/>
+        <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" HorizontalAlignment="Left" Margin="168,239,0,0" VerticalAlignment="Top" Width="188" Height="25"/>
     </Grid>
 </Window>
-    

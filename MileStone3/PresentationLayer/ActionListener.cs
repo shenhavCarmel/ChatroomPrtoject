@@ -115,8 +115,6 @@ namespace MileStone3.PresentationLayer
             }
         }
 
-
-
         private bool[] _sorterMode = new bool[] {true, false};
         public bool[] SorterMode
         {
@@ -165,6 +163,22 @@ namespace MileStone3.PresentationLayer
             }
         }
 
+        private String _selectedMsg = "";
+        public String SelectedMsg
+        {
+            get
+            {
+                return _selectedMsg;
+            }
+            set
+            {
+                if (_selectedMsg != value)
+                {
+                    _selectedMsg = value;
+                    OnPropertyChanged(_selectedMsg);
+                }
+            }
+        }
 
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
