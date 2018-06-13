@@ -76,6 +76,7 @@
     <Compile Include="DataAccessLayer\QueryRunner.cs" />
     <Compile Include="DataAccessLayer\Query.cs" />
     <Compile Include="LogicLayer\ChatRoom.cs" />
+    <Compile Include="LogicLayer\Hashing.cs" />
     <Compile Include="LogicLayer\Message.cs" />
     <Compile Include="LogicLayer\User.cs" />
     <Page Include="PresentationLayer\ChatRoomWindow.xaml">
@@ -86,6 +87,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="PresentationLayer\MsgEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PresentationLayer\ActionListener.cs" />
@@ -94,6 +99,9 @@
     </Compile>
     <Compile Include="PresentationLayer\FirstWindow.xaml.cs">
       <DependentUpon>FirstWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\MsgEditor.xaml.cs">
+      <DependentUpon>MsgEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

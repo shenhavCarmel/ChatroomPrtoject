@@ -115,22 +115,20 @@ namespace MileStone3.PresentationLayer
             }
         }
 
-
-
-        private bool[] _sorterMode = new bool[] {true, false};
+        private bool[] _sorterMode = new bool[] { true, false };
         public bool[] SorterMode
         {
             get { return _sorterMode; }
         }
         public Boolean SelectedModeAscending
         {
-           get { return _sorterMode[0]; }
+            get { return _sorterMode[0]; }
         }
 
         private bool[] _sorterType = new bool[] { true, false, false };
         public bool[] SorterType
         {
-            get { return _sorterType; } 
+            get { return _sorterType; }
         }
         public int SelectedTypeSorterIndex
         {
@@ -156,7 +154,7 @@ namespace MileStone3.PresentationLayer
 
             get
             {
-                for (int i=0; i<_filterType.Length; i++)
+                for (int i = 0; i < _filterType.Length; i++)
                 {
                     if (_filterType[i])
                         return i;
@@ -165,6 +163,22 @@ namespace MileStone3.PresentationLayer
             }
         }
 
+        private String _selectedMsg = "";
+        public String SelectedMsg
+        {
+            get
+            {
+                return _selectedMsg;
+            }
+            set
+            {
+                if (_selectedMsg != value)
+                {
+                    _selectedMsg = value;
+                    OnPropertyChanged(_selectedMsg);
+                }
+            }
+        }
 
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

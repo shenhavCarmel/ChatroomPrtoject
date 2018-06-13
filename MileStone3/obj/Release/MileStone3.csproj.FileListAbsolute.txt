@@ -28,3 +28,36 @@ C:\Nofar\ISE182_project23\MileStone3\obj\Release\MileStone3.csproj.CoreCompileIn
 C:\Nofar\ISE182_project23\MileStone3\obj\Release\MileStone3.csproj.CopyComplete
 C:\Nofar\ISE182_project23\MileStone3\obj\Release\MileStone3.exe
 C:\Nofar\ISE182_project23\MileStone3\obj\Release\MileStone3.pdb
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\bin\Release\NUnit3.TestAdapter.dll
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\bin\Release\NUnit3.TestAdapter.pdb
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\bin\Release\nunit.engine.dll
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\bin\Release\nunit.engine.api.dll
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\bin\Release\Mono.Cecil.dll
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\bin\Release\MileStone3.exe.config
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\bin\Release\MileStone3.exe
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\bin\Release\MileStone3.pdb
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\bin\Release\log4net.dll
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\bin\Release\Newtonsoft.Json.dll
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\bin\Release\nunit.framework.dll
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\bin\Release\log4net.xml
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\bin\Release\Newtonsoft.Json.xml
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\bin\Release\nunit.framework.pdb
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\bin\Release\nunit.framework.xml
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\obj\Release\PresentationLayer\ChatRoomWindow.g.cs
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\obj\Release\PresentationLayer\FirstWindow.g.cs
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\obj\Release\App.g.cs
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\obj\Release\MileStone3_Content.g.cs
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\obj\Release\MileStone3_MarkupCompile.cache
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\obj\Release\MileStone3_MarkupCompile.lref
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\obj\Release\PresentationLayer\ChatRoomWindow.baml
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\obj\Release\PresentationLayer\FirstWindow.baml
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\obj\Release\MileStone3.g.resources
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\obj\Release\MileStone3.Properties.Resources.resources
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\obj\Release\MileStone3.csproj.GenerateResource.cache
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\obj\Release\MileStone3.csproj.CoreCompileInputs.cache
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\obj\Release\MileStone3.csproj.CopyComplete
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\obj\Release\MileStone3.exe
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\obj\Release\MileStone3.pdb
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\obj\Release\MileStone3.csprojResolveAssemblyReference.cache
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\obj\Release\PresentationLayer\MsgEditor.g.cs
+C:\Users\Win10\Desktop\תיקיות\שיעורים\הנדסת תוכנה\MileStone3\ISE182_project23\MileStone3\obj\Release\PresentationLayer\MsgEditor.baml
