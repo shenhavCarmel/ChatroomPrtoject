@@ -16,7 +16,7 @@ namespace MileStone3.DataAccessLayer
 
         private String _connectionString;
         private String _sqlQuery;
-        private const String _serverAddress = "localhost\\SQLEXPRESS";
+        private const String _serverAddress = "ise172.ise.bgu.ac.il,1433\\DB_LAB";
         private const String _databaseName = "MS3";
         private const String _userName = "publicUser";
         private const String _password = "isANerd";
@@ -34,7 +34,7 @@ namespace MileStone3.DataAccessLayer
             _isFirstExecute = true;
 
             // set sql connection
-            _connectionString = $"Data Source={_serverAddress};Initial Catalog={_databaseName };Integrated Security=True;";
+            _connectionString = $"Data Source={_serverAddress};Initial Catalog={_databaseName};User ID={_userName};Password={_password}";
             _recentTimeStamp = new DateTime();
         }
 
