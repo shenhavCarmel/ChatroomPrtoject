@@ -20,7 +20,8 @@ namespace MileStone3.PresentationLayer
         private ChatRoom _chatRoom;
         public ActionListener _chatBinder;
         private DispatcherTimer _dispatcherTimer;
-        
+        private Boolean _editMsg;
+        private Message _msgToEdit;
 
         public ChatRoomWindow(ChatRoom chatR, ActionListener chatBinder)
         {
@@ -37,7 +38,9 @@ namespace MileStone3.PresentationLayer
             _dispatcherTimer.Tick += dispatcherTimer_Tick; 
             _dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 2);
             _dispatcherTimer.Start();
-            
+
+            _editMsg = false;
+            _msgToEdit = null;
         }
 
         private void UpdateScrollBar(ListBox listBox)
@@ -74,7 +77,7 @@ namespace MileStone3.PresentationLayer
                 // check if a new message was added to the list box
                 int numOfNewMsgs = _chatBinder.DisplayedMsgs.Count;
                 if (numOfMsg < numOfNewMsgs)
-                    UpdateScrollBar(lbDisplayMsgs);
+                    UpdateScrollBar(lbDisplayMsgs); 
             }
             catch (Exception ex)
             {
@@ -89,27 +92,38 @@ namespace MileStone3.PresentationLayer
 
         private void btnSend_Click(object sender, RoutedEventArgs e)
         {
-            const int MAX_LENGTH = 150;
-            String msgBody = _chatBinder.MsgBody;
-
-            // check if the message is valid
-            if (msgBody.Length > 0 && msgBody.Length <= MAX_LENGTH)
+            if (!_editMsg)
             {
-                // send the message
-                _chatRoom.SendMessage(msgBody);
-                _chatBinder.MsgBody = "";
+                const int MAX_LENGTH = 150;
+                String msgBody = _chatBinder.MsgBody;
+
+                // check if the message is valid
+                if (msgBody.Length > 0 && msgBody.Length <= MAX_LENGTH)
+                {
+                    // send the message
+                    _chatRoom.SendMessage(msgBody);
+                    _chatBinder.MsgBody = "";
+                }
+                else
+                {
+                    if (MessageBox.Show("the message must contain less than 150 letters and more than 0", "invalid message", MessageBoxButton.OK
+                   , MessageBoxImage.Error) == MessageBoxResult.OK)
+                    {
+                        _chatBinder.MsgBody = "";
+                    }
+                }
             }
             else
             {
-                if (MessageBox.Show("the message must contain less than 150 letters and more than 0", "invalid message", MessageBoxButton.OK
-               , MessageBoxImage.Error) == MessageBoxResult.OK)
-                {
-                    _chatBinder.MsgBody = "";
-                }
+                _chatRoom.editMsg(_msgToEdit, _chatBinder.MsgBody);
+                _editMsg = false;
+                _chatBinder.MsgBody = "";
             }
+
+
         }
 
-        
+
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -141,19 +155,35 @@ namespace MileStone3.PresentationLayer
 
         private void btnFilter_Click(object sender, RoutedEventArgs e)
         {
-            
-           try
-           {
-                // filter displayed messages according to selected binded fields
-                _chatBinder.DisplayedMsgs.Clear();
-                _chatRoom.RetrieveMsg();
-                foreach (Message currMsg in _chatRoom.GetMessagesInChat())
+            try
+            {
+                if (_chatRoom.GetFilter().checkIfFilterByUser())
                 {
-                    _chatBinder.DisplayedMsgs.Add(currMsg.ToString());
+                    if (_chatRoom.CheckIfUserExists(_chatBinder.FilterNickname, _chatBinder.FilterGroupId))
+                    {
+                        // filter displayed messages according to selected binded fields
+                        _chatBinder.DisplayedMsgs.Clear();
+                        _chatRoom.RetrieveMsg();
+                        foreach (Message currMsg in _chatRoom.GetMessagesInChat())
+                        {
+                            _chatBinder.DisplayedMsgs.Add(currMsg.ToString());
+                        }
+                    }
+                    else
+                    {
+
+                        if (MessageBox.Show("User doesn't exist", "Error", MessageBoxButton.OK
+                                                        , MessageBoxImage.Error) == MessageBoxResult.OK)
+                        {
+                            _chatBinder.FilterGroupId = "";
+                            _chatBinder.FilterNickname = "";
+                        }
+
+                    }
                 }
-           }
-           catch (Exception ex)
-           {
+            }
+            catch (Exception ex)
+            {
 
                 // error in filter process
                 if (MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK
@@ -221,5 +251,22 @@ namespace MileStone3.PresentationLayer
             }
         }
 
+        private void lbDisplayMsgs_SelectionChanged(Object sender, SelectionChangedEventArgs e)
+        {
+            //string msg = _chatBinder.SelectedMsg;
+            String msgUser = this._chatRoom.getLoggedInUser().GetNickname() + " (group " + this._chatRoom.getLoggedInUser().GetGroupId()+"):";
+            
+            if (_chatBinder.SelectedMsg != null && _chatBinder.SelectedMsg.Contains(msgUser))
+            {
+                String selectedMsg = _chatBinder.SelectedMsg;
+                if (MessageBox.Show("are you sure you want to edit your message?", "message editor", MessageBoxButton.YesNo
+                        , MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    _msgToEdit = _chatRoom.getMessagToEdit(selectedMsg);
+                    _editMsg = true;
+                    _chatBinder.MsgBody = _msgToEdit.GetMessageContent();
+                }
+            }
+        }
     }
 }

@@ -37,7 +37,7 @@
                 <SolidColorBrush Color="Black"/>
             </Label.BorderBrush>
         </Label>
-        <Label Content="2" HorizontalAlignment="Left" Height="128" Margin="235,-9,0,0" VerticalAlignment="Top" Width="90" Foreground="#FFE1E8F5" FontSize="110" FontFamily="Gabriola" OpacityMask="Black" BorderBrush="Black"/>
+        <Label Content="3" HorizontalAlignment="Left" Height="162" Margin="235,-9,0,0" VerticalAlignment="Top" Width="90" Foreground="#FFE1E8F5" FontSize="110" FontFamily="Gabriola" OpacityMask="Black" BorderBrush="Black"/>
         <Label x:Name="lblEnterPassword" Content="Password" HorizontalAlignment="Left" Margin="58,235,0,0" VerticalAlignment="Top" Width="92" Foreground="#FFF0EFEF" FontSize="20"/>
         <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" HorizontalAlignment="Left" Margin="168,239,0,0" VerticalAlignment="Top" Width="188" Height="25"/>
     </Grid>

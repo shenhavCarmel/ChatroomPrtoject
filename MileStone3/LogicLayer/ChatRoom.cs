@@ -22,7 +22,7 @@ namespace MileStone3.LogicLayer
         private Sorter _sorter;
         private Filter _filter;
         public ActionListener _chatBinder;
-
+       
         // constructor
         public ChatRoom(ActionListener binder)
         {
@@ -34,10 +34,11 @@ namespace MileStone3.LogicLayer
 
             // set sorter and filter
             _sorter = new Sorter(_chatBinder.SelectedModeAscending, _chatBinder.SelectedTypeSorterIndex);
-            _filter = new Filter(_chatBinder.SelectedTypeFilterIndex, _chatBinder.FilterGroupId, _chatBinder.FilterNickname);
+            _filter = new Filter(_chatBinder);
+
 
             // load users' and messages' data from db
-            _lastMsgsInChat = _queryRunner.excuteMsgQuery(_filter, _sorter);
+            _lastMsgsInChat = Sort(_queryRunner.excuteMsgQuery(null), true);
             _displayedMsgs = new List<Message>();
             _displayedMsgs.AddRange(_lastMsgsInChat);
 
@@ -46,21 +47,21 @@ namespace MileStone3.LogicLayer
 
         public List<User> GetRegisteredUsers()
         {
-            // TODO: implement this function
             return _queryRunner.executeUserQuery(null);
         }
+        
         public List<Message> GetMessagesInChat()
         {
-            return Sort();
+            return _displayedMsgs;
         }
 
-        public Boolean Login(String nickname, string groupId, String password)
+        public Boolean Login(String nickname, String groupId, String password)
         {
             User userToLogin = new User(nickname, groupId, password);
 
-            if (CheckIfUserExists(userToLogin))
+            if (CheckIfUserExists(userToLogin.GetNickname(), userToLogin.GetGroupId()))
             {
-                // TODO :  check if the user's password matches his password in db
+                // check if the user's password matches his password in db
                 if (isUserPasswordCorrect(userToLogin))
                 {
                     // change state of user
@@ -91,22 +92,24 @@ namespace MileStone3.LogicLayer
         }
         private Boolean isUserPasswordCorrect(User userToLogin)
         {
+  
             List<User> ans = _queryRunner.executeUserQuery(userToLogin);
-            return (userToLogin.getPassword().Equals(ans[0].getPassword()));
+            return (userToLogin.GetPassword().Equals(ans[0].GetPassword()));
+
         }
-        public Boolean Register(String nickname, string groupId, string password)
+        public Boolean Register(String nickname, String groupId, String password)
         {
             // check if arguments are valid
             if ((nickname == null || nickname.Equals("")) | (groupId == null || groupId.Equals("")) | (password == null || password.Equals("")))
             {
-                return false;
+                throw new ArgumentException("register details invalid");
             }
             else
             {
 
                 User userToRegister = new User(nickname, groupId, password);
 
-                if (!CheckIfUserExists(userToRegister))
+                if (!CheckIfUserExists(userToRegister.GetNickname(), userToRegister.GetGroupId()))
                 {
 
                     _queryRunner.saveUserToDB(userToRegister);
@@ -134,29 +137,49 @@ namespace MileStone3.LogicLayer
             return _sorter;
         }
 
-        public Boolean CheckIfUserExists(User user)
+        public Boolean CheckIfUserExists(String nickname, String groupId) 
         {
             // try to find the user in the db
-            return (_queryRunner.executeUserQuery(user) != null);   
+            User userTocheck = new User(nickname, groupId);
+            return (_queryRunner.executeUserQuery(userTocheck).Count != 0);   
         }
 
         public Boolean RetrieveMsg()
         {
             try
             {
-                List<Message> retrievedMsg = _queryRunner.excuteMsgQuery(_filter, _sorter);
+                // refresh filter
+                _filter.setFilteringType();
+                _filter.setGroupId();
+                _filter.setNickname();
+
+                // take new messages from server
+                List<Message> retrievedMsg = _queryRunner.excuteMsgQuery(null);
+
                 if (_lastMsgsInChat.Count() + retrievedMsg.Count() > 200)
                 {
                     // substract the difference
                     int difference = _lastMsgsInChat.Count() + retrievedMsg.Count() - 200;
-                    _lastMsgsInChat.RemoveRange(0, difference);                   
+                    _lastMsgsInChat.RemoveRange(0, difference);
                 }
 
                 // add the new messages
                 _lastMsgsInChat.AddRange(retrievedMsg);
 
-                // configure the displayed msgs according to sorting
-                _displayedMsgs = Sort();
+                // keep lastMsgsInChat list sorted by timeStamp
+                _lastMsgsInChat = Sort(_lastMsgsInChat, true);
+
+                // the user wants to filter, use filtered query
+                if (_filter.isFiltered() && _filter.isValid())
+                {
+                    _displayedMsgs = Sort(_queryRunner.excuteMsgQuery(_filter), false);
+                }
+
+                // the user isn't filtering, diaplay all last messages
+                else
+                {
+                    _displayedMsgs = Sort(_lastMsgsInChat, false);
+                }
 
                 // logger
                 log.Info("Chatroom retrieved new messages from server and updated presentation");
@@ -176,10 +199,8 @@ namespace MileStone3.LogicLayer
         {
             try
             {
-                // send message content to server through user, save the returned object message
-                Message newSentMessage = _loggedInUser.SendMessage(body, _URL);
-
-                // TODO: save message in db
+                // send message and save in DB through user
+                _loggedInUser.SendMessage(body, _queryRunner);
 
                 // logger
                 log.Info("User sent a new message");
@@ -213,39 +234,49 @@ namespace MileStone3.LogicLayer
             return _loggedInUser == null;
         }
 
-        public List<Message> Sort()
+        public User getLoggedInUser()
         {
-            // sort the relevant messages according to settings
-            _sorter.setSortingType(_chatBinder.SelectedTypeSorterIndex);
-            _sorter.setAscending(_chatBinder.SorterMode[0]);
+            return _loggedInUser;
+        }
+
+        public Message getMessagToEdit(String msg)
+        {
+            foreach (Message currMsg in _displayedMsgs)
+            {
+                if (currMsg.ToString().Equals(msg))
+                    return currMsg;
+            }
+            return null;
+        }
+
+        public void editMsg(Message msg, String newContent)
+        {
+            _queryRunner.editMsgInDb(msg, newContent);
+            _displayedMsgs.Remove(msg);
+            _lastMsgsInChat.Remove(msg);
+        }
+
+
+        public List<Message> Sort(List<Message> lst, Boolean byTimeStamp)
+        {
+            // force sorting by timeStamp
+            if (byTimeStamp)
+            {
+                _sorter.setSortingType(0);
+                _sorter.setAscending(true);
+
+            }
+            else
+            {
+                // sort the relevant messages according to settings
+                _sorter.setSortingType(_chatBinder.SelectedTypeSorterIndex);
+                _sorter.setAscending(_chatBinder.SorterMode[0]);
+            }
 
             // logger
             log.Info("Messages in chat room where sorted by user preferences");
-            return _sorter.runSort(_lastMsgsInChat);
-        }
-
-        /*
-        public void FilterMsgs()
-        {
-            // set filter type
-            _filter.setFilteringType(_chatBinder.SelectedTypeFilterIndex);
-            try
-            {
-                // run the filter
-                _currDisplayedMsgs = _filter.runFilter(_messages, _registeredUsers,
-                                         _chatBinder.FilterGroupId, _chatBinder.FilterNickname);
-
-                // logger
-                log.Info("Filtering process succeed");
-            }
-            catch (Exception e)
-            {
-                // logger
-                log.Error("Filtering process failed- " + e.Message);
-                throw e;
-            }
-        }*/
-
+            return _sorter.runSort(lst);
+        
         public class Sorter
         {
             private Boolean _ascending;
@@ -280,6 +311,8 @@ namespace MileStone3.LogicLayer
             public List<Message> runSort(List<Message> listToSort)
             {
                 List<Message> msgs = new List<Message>();
+
+                msgs = listToSort.Distinct().ToList();
 
                 // execute sort according to settings (type and mode)
                 switch (_sortingType)
@@ -326,7 +359,7 @@ namespace MileStone3.LogicLayer
                 return msgs;
             }
         }
-    
+
         public class Filter
         {
             private const int GROUP = 0;
@@ -335,17 +368,29 @@ namespace MileStone3.LogicLayer
             private int _filteringType;
             private String _groupId;
             private String _nickname;
+            private ActionListener _binder;
 
-            public Filter(int filteringType, String GID, String nick)
+            public Filter(ActionListener binder)
             {
-                _filteringType = filteringType;
-                _groupId = GID;
-                _nickname = nick;
+                this._binder = binder;
+                _filteringType = binder.SelectedTypeFilterIndex;
+                _groupId = binder.FilterGroupId;
+                _nickname = _binder.FilterNickname;
             }
 
-            public void setFilteringType(int filteringType)
+            public void setFilteringType()
             {
-                _filteringType = filteringType;
+                _filteringType = _binder.SelectedTypeFilterIndex;
+            }
+
+            public void setGroupId()
+            {
+                _groupId = _binder.FilterGroupId;
+            }
+
+            public void setNickname()
+            {
+                _nickname = _binder.FilterNickname;
             }
 
             public int getFilterType()
@@ -362,7 +407,41 @@ namespace MileStone3.LogicLayer
             {
                 return _nickname;
             }
-            
+
+            internal bool isFiltered()
+            {
+                return _filteringType != NONE;
+            }
+
+            public bool checkIfFilterByUser()
+            {
+                return (this.getFilterType() == USER);
+            }
+
+            public bool isValid()
+            {
+                bool isFilterValid = true;
+
+                switch (this.getFilterType())
+                {
+                    case GROUP:
+                        if (this.getGroupId() == "")
+                        {
+                            isFilterValid = false;
+                        }
+
+                        break;
+                    case USER:
+                        if (this.getGroupId() == "" || this.getNickname() == "")
+                        {
+                            isFilterValid = false;
+                        }
+
+                        break;
+                }
+
+                return isFilterValid;
+            }
         }
     }
 }

@@ -17,13 +17,16 @@ namespace MileStone3.LogicLayer
         private DateTime _timeStamp;
         private string _groupID;
         private string _userName;
+        private User _user;
 
-        public Message(string body, User user)
+        public Message(String body, User user, DateTime timeStamp, Guid guid)
         {
-
+            this._user = user;
             this._messageContent = body;
             this._groupID = user.GetGroupId();
             this._userName = user.GetNickname();
+            this._ID = guid;
+            this._timeStamp = timeStamp;
 
             // logger
             log.Info("New message was created");
@@ -34,6 +37,10 @@ namespace MileStone3.LogicLayer
             return this._messageContent;
         }
 
+        public User getUser()
+        {
+            return this._user;
+        }
 
         public String GetGroupID()
         {
@@ -57,9 +64,11 @@ namespace MileStone3.LogicLayer
         }
 
 
+
+        override
         public String ToString()
         {
-            return (this._userName +"(group " + this._groupID + "): " + "\r\n" + this._messageContent
+            return (this._userName.Trim() +" (group " + this._groupID + "): " + "\r\n" + this._messageContent
                      + "\r\n" + "-" + this._timeStamp + "-");
         }
 

@@ -1,6 +1,7 @@
 ﻿using MileStone3.LogicLayer;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -9,13 +10,13 @@ using static MileStone3.LogicLayer.ChatRoom;
 
 namespace MileStone3.DataAccessLayer
 {
-    class QueryRunner
+    public class QueryRunner
     {
         //fields
 
         private String _connectionString;
         private String _sqlQuery;
-        private const String _serverAddress = "ise172.ise.bgu.ac.il,1433\\DB_LAB";
+        private const String _serverAddress = "localhost\\SQLEXPRESS";
         private const String _databaseName = "MS3";
         private const String _userName = "publicUser";
         private const String _password = "isANerd";
@@ -31,23 +32,36 @@ namespace MileStone3.DataAccessLayer
         public QueryRunner()
         {
             _isFirstExecute = true;
+
             // set sql connection
-            _connectionString = $"Data Source={_serverAddress};Initial Catalog={_databaseName};User ID={_userName};Password={_password}";
+            _connectionString = $"Data Source={_serverAddress};Initial Catalog={_databaseName };Integrated Security=True;";
             _recentTimeStamp = new DateTime();
         }
 
-        public List<Message> excuteMsgQuery(Filter filter, Sorter sorter)
+        public List<Message> excuteMsgQuery(Filter filter)
         {
             _connection = new SqlConnection(_connectionString);
             List<Message> newMsgs = new List<Message>();
             try
             {
-
                 _connection.Open();
 
+                _command = new SqlCommand(null, _connection);
+
                 // generate a query according to the arguments
-                _sqlQuery = generateMsgQuery(filter, sorter).toString();
-                _command = new SqlCommand(_sqlQuery, _connection);
+                if (filter != null && filter.isValid())
+                { 
+                    _sqlQuery = generateMsgQuery(filter).toString();
+                }
+                else
+                {
+                    _sqlQuery = generateMsgQuery().toString();
+                }
+
+               
+                _command.CommandText = _sqlQuery;
+
+                _command.Prepare();
                 _dataReader = _command.ExecuteReader();
 
                 while (_dataReader.Read())
@@ -55,9 +69,10 @@ namespace MileStone3.DataAccessLayer
                     //DateTime dateFacturation = new DateTime();
                     if (!_dataReader.IsDBNull(3))
                     {
-
+                        DateTime dt= Convert.ToDateTime(_dataReader.GetValue(2)); 
+                        Guid g = new Guid(_dataReader.GetValue(0).ToString());
                         User newUser = new User(_dataReader.GetValue(6).ToString(), _dataReader.GetValue(5).ToString(), _dataReader.GetValue(7).ToString());
-                        Message currMsg = new Message(_dataReader.GetValue(3).ToString(), newUser);
+                        Message currMsg = new Message(_dataReader.GetValue(3).ToString().Trim(), newUser, dt, g);
                         newMsgs.Add(currMsg);
                     }
 
@@ -65,9 +80,6 @@ namespace MileStone3.DataAccessLayer
                 _dataReader.Close();
                 _command.Dispose();
                 _connection.Close();
-
-                // update recent time stamp for future executing
-                _recentTimeStamp = DateTime.Now;
 
             }
             catch (Exception ex)
@@ -77,8 +89,23 @@ namespace MileStone3.DataAccessLayer
 
             return newMsgs;
         }
+        private Query generateMsgQuery()
+        {
+            Query qr = new Query("Messages msgs, Users users", "msgs.User_Id = users.Id", true);
+            if (!_isFirstExecute)
+            {
+                qr.setWhere(qr.getWhere() + " AND msgs.SendTime >= '" + _recentTimeStamp.ToString("yyyy-MM-dd HH:mm:ss") + "'");
+                _recentTimeStamp = DateTime.Now;
+            }
+            else
+            {
+                _isFirstExecute = false;
+                _recentTimeStamp = DateTime.Now;
+            }
 
-        private Query generateMsgQuery(Filter filter, Sorter sorter)
+            return qr;
+        }
+        private Query generateMsgQuery(Filter filter)
         {
             const int GROUP = 0;
             const int USER = 1;
@@ -90,25 +117,45 @@ namespace MileStone3.DataAccessLayer
             {
 
                 case GROUP:
-                    qr = new Query("Messages msgs, Users users", "users.group_Id = " + filter.getGroupId() +
-                        " AND msgs.User_Id = users.Id", true);
+                    qr = new Query("Messages msgs, Users users", "users.group_Id = @groupid AND msgs.User_Id = users.Id", true);
+
+                    SqlParameter param_groupid = new SqlParameter("@groupid", SqlDbType.Int, 20);
+
+                    param_groupid.Value = filter.getGroupId();
+
+                    _command.Parameters.Add(param_groupid);
+
                     break;
 
                 case USER:
                     qr = new Query("Messages msgs, Users users", "msgs.User_Id = users.Id " +
-                        "AND users.Group_Id = " + filter.getGroupId() + " AND users.Nickname = " + filter.getNickname() , true);
+                        "AND users.Group_Id = @groupid  AND users.Nickname = @nickname", true);
+
+                    SqlParameter param_groupId = new SqlParameter("@groupid", SqlDbType.Int, 20);
+                    SqlParameter param_nickname = new SqlParameter("@nickname", SqlDbType.Char, 8);
+
+                    param_groupId.Value = filter.getGroupId();
+                    param_nickname.Value = filter.getNickname();
+
+                    _command.Parameters.Add(param_groupId);
+                    _command.Parameters.Add(param_nickname);
                     break;
 
                 case NONE:
                     qr = new Query("Messages msgs, Users users", "msgs.User_Id = users.Id", true);
                     break;     
             }
-            if (!_isFirstExecute)
+            if (!_isFirstExecute && filter.getFilterType() == NONE)
             {
-                qr.setWhere(qr.getWhere() + " AND msgs.SendTime > convert(datetime, '" + _recentTimeStamp.ToString("dd/MM/yyyy HH:mm:ss") + "')");
+                qr.setWhere(qr.getWhere() + " AND msgs.SendTime >= '"+_recentTimeStamp.ToString("yyyy-MM-dd HH:mm:ss") + "'");
+                _recentTimeStamp = DateTime.Now;
             }
-            else
+            else if(_isFirstExecute)
+            {
                 _isFirstExecute = false;
+                _recentTimeStamp = DateTime.Now;
+            }
+
 
             return qr;
         }
@@ -128,9 +175,18 @@ namespace MileStone3.DataAccessLayer
 
                 // if "user" argument not null return the user details from db
                 // (check if the user is registered)
-                String where = "Nickname = " + user.GetNickname() + 
-                               " AND Group_Id = " + user.GetGroupId();
+                String where = "Nickname = @nickname AND Group_Id = @groupid";
                 qr = new Query("Users", where, false);
+
+                SqlParameter param_groupId = new SqlParameter("@groupid", SqlDbType.Int, 20);
+                SqlParameter param_nickname = new SqlParameter("@nickname", SqlDbType.Char, 8);
+
+                param_groupId.Value = user.GetGroupId();
+                param_nickname.Value = user.GetNickname();
+
+                _command.Parameters.Add(param_groupId);
+                _command.Parameters.Add(param_nickname);
+
             }
 
             return qr;
@@ -147,10 +203,13 @@ namespace MileStone3.DataAccessLayer
             {
                 _connection.Open();
 
+                _command = new SqlCommand(null, _connection);
+
                 // generate a query according to the arguments
                 _sqlQuery = generateUserQuery(user).toString();
 
-                _command = new SqlCommand(_sqlQuery, _connection);
+                _command.CommandText = _sqlQuery;
+                _command.Prepare();
                 _dataReader = _command.ExecuteReader();
 
                 while (_dataReader.Read())
@@ -178,29 +237,112 @@ namespace MileStone3.DataAccessLayer
 
         public void saveUserToDB(User userToSave)
         {
+            _connection = new SqlConnection(_connectionString);
             _connection.Open();
             _command = new SqlCommand(null, _connection);
 
             _command.CommandText = "INSERT INTO Users([Group_Id], [Nickname],[Password])" +
                        "VALUES (@groupid,@nickname,@password)";
 
-            SqlParameter groupId = new SqlParameter(@"groupid", System.Data.SqlDbType.Text, 20);
+            SqlParameter groupId = new SqlParameter(@"groupid", System.Data.SqlDbType.Int, 20);
             SqlParameter nickname = new SqlParameter(@"nickname", System.Data.SqlDbType.Text, 20);
-            SqlParameter password = new SqlParameter(@"password", System.Data.SqlDbType.Text, 20);
+            SqlParameter password = new SqlParameter(@"password", System.Data.SqlDbType.Text, 64);
 
 
             groupId.Value = userToSave.GetGroupId();
             nickname.Value = userToSave.GetNickname();
-            password.Value = userToSave.getPassword();
+            password.Value = userToSave.GetPassword();
 
             _command.Parameters.Add(groupId);
             _command.Parameters.Add(nickname);
             _command.Parameters.Add(password);
 
             int numRowChange = _command.ExecuteNonQuery();
+
             _command.Dispose();
             _connection.Close();
 
+        }
+
+        public void saveMsgToDB(Message msgToSave)
+        {
+            String userId = getUserId(msgToSave.getUser());
+
+            _connection.Open();
+            _command = new SqlCommand(null, _connection);
+
+            _command.CommandText = "INSERT INTO Messages([Guid],[User_Id],[SendTime],[Body])" +
+                       " VALUES (@guid,@userid,@sendtime,@body)";
+
+            SqlParameter guid = new SqlParameter(@"guid", System.Data.SqlDbType.UniqueIdentifier, 68);
+            SqlParameter userid = new SqlParameter(@"userid", System.Data.SqlDbType.Int, 20);
+            SqlParameter sendtime = new SqlParameter(@"sendtime", System.Data.SqlDbType.DateTime, 100);
+            SqlParameter body = new SqlParameter(@"body", System.Data.SqlDbType.Text, 100);
+
+            guid.Value = msgToSave.GetId();
+            userid.Value = Int32.Parse(userId);
+            sendtime.Value = msgToSave.GetDate();
+            body.Value = msgToSave.GetMessageContent();
+
+            _command.Parameters.Add(guid);
+            _command.Parameters.Add(userid);
+            _command.Parameters.Add(sendtime);
+            _command.Parameters.Add(body);
+
+            int numRowChange = _command.ExecuteNonQuery();
+            _command.Dispose();
+            _connection.Close();
+
+        }
+
+        private String getUserId(User user)
+        {
+            _connection = new SqlConnection(_connectionString);
+           
+
+            _connection.Open();
+            _command = new SqlCommand(null, _connection);
+            _sqlQuery = generateUserQuery(user).toString();
+            _command.CommandText = _sqlQuery;
+            _command.Prepare();
+            _dataReader = _command.ExecuteReader();
+            String id = "";
+            while (_dataReader.Read())
+            {
+                id = Convert.ToString(_dataReader.GetValue(0));
+            } 
+
+                _dataReader.Close();
+                _command.Dispose();
+                _connection.Close();
+
+            return id;
+            }
+
+        public void editMsgInDb(Message msg, String newContent)
+        {
+            _connection.Open();
+            _command = new SqlCommand(null, _connection);
+
+            _command.CommandText = "Update Messages SET Body = @body, SendTime = @sendtime WHERE  Guid = @guid";
+
+            SqlParameter param_guid = new SqlParameter("@guid", SqlDbType.UniqueIdentifier, 68);
+            SqlParameter sendtime = new SqlParameter(@"sendtime", System.Data.SqlDbType.DateTime, 100);
+            SqlParameter body = new SqlParameter(@"body", System.Data.SqlDbType.NChar, 100);
+
+            param_guid.Value = msg.GetId();
+            sendtime.Value = DateTime.Now;
+            body.Value = newContent;
+
+            _command.Parameters.Add(param_guid);
+            _command.Parameters.Add(sendtime);
+            _command.Parameters.Add(body);
+
+            _command.Prepare();
+            _command.ExecuteNonQuery();
+
+            _command.Dispose();
+            _connection.Close();
 
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MileStone3.DataAccessLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,14 @@ namespace MileStone3.LogicLayer
             this._nickname = nickname;
             this._groupId = groupId;
             this._password = password;
+            
+        }
+
+        public User(String nickname, String groupId)
+        {
+            this._isLoggedIn = false;
+            this._nickname = nickname;
+            this._groupId = groupId;
         }
 
 
@@ -35,23 +44,12 @@ namespace MileStone3.LogicLayer
             _isLoggedIn = true;
         }
 
-        public Message SendMessage(string body, String URL)
+        public void SendMessage(string body, QueryRunner queryRunner)
         {
-            try
-            {
-                /*
-                Message sentMsg = Communication.Instance.Send(URL, _groupId, _nickname, body);
+            Message toSend = new Message(body, this, DateTime.Now, Guid.NewGuid());
 
-                // return the IMessage converted to message
-                return new Message(sentMsg);
-                */
-                return null;
-            }
-            catch
-            {
-                throw new Exception();
-            }
-
+            // update DB
+            queryRunner.saveMsgToDB(toSend);
         }
 
         public String GetNickname()
@@ -69,12 +67,12 @@ namespace MileStone3.LogicLayer
             return this._groupId;
         }
 
-        public void SetGroupId(string newGroupId)
+        public void SetGroupId(string newGroupId) 
         {
             this._groupId = newGroupId;
         }
 
-        public String getPassword()
+        public String GetPassword()
         {
             return this._password;
         }

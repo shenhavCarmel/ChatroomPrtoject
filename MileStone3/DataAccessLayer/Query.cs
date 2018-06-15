@@ -23,7 +23,11 @@ namespace MileStone3.DataAccessLayer
             if (isForMsgs)
             {
                 _orderBy = "SendTime";
-            }          
+            }
+            else
+            {
+                _orderBy = "Id";
+            }
         }
 
         public Query()

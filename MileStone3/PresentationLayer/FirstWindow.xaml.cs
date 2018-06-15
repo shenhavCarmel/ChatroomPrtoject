@@ -26,7 +26,9 @@ namespace MileStone3.PresentationLayer
         private ChatRoom chatR;
         private ActionListener _chatBinder;
         private Hashing _hashing;
-        private String _password;
+        private Boolean _isPasswordValid;
+        private string _hashedPassword;
+
         public FirstWindow()
         {
             InitializeComponent();
@@ -34,31 +36,42 @@ namespace MileStone3.PresentationLayer
             this.DataContext = _chatBinder;
             this.chatR = new ChatRoom(_chatBinder);
             this._hashing = new Hashing();
-            this._password = "";
+            this._isPasswordValid = false;
+            this._hashedPassword = "";
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             String strNickname = _chatBinder.StartNickname;
             String strGroupID = _chatBinder.StartGroupId;
-            String password = _password;
 
             // if user details are valid, register
-            if (CheckValidGroupId(strGroupID) && CheckValidPassword(password))
+            if (CheckValidGroupId(strGroupID) && _isPasswordValid)
             {
-                String hashedPassword = _hashing.GetHashString(password+"1337");
-                if (this.chatR.Register(strNickname, strGroupID, hashedPassword))
+                try
                 {
-                    MessageBox.Show("Registerd succesfully");
+                    if (this.chatR.Register(strNickname, strGroupID, _hashedPassword))
+                    {
+                        MessageBox.Show("Registerd succesfully");
+                    }
+                    else
+                    {
+                        if (MessageBox.Show("Registered failed - user already registered!",
+                                            "Please Login", MessageBoxButton.OK, MessageBoxImage.Error) == MessageBoxResult.OK)
+                        {
+                            _chatBinder.StartGroupId = "";
+                            _chatBinder.StartNickname = "";
+
+                        }
+                    }
                 }
-                else
+                catch
                 {
-                    if (MessageBox.Show("Registered failed - deatils invalid/uncorrect",
-                                        "invalid deatils", MessageBoxButton.OK, MessageBoxImage.Error) == MessageBoxResult.OK)
+                    if (MessageBox.Show("Invalid group Id/nickname - group Id should be only numbers, nickname must be at least one character",
+                                    "invalid deatils", MessageBoxButton.OK, MessageBoxImage.Error) == MessageBoxResult.OK)
                     {
                         _chatBinder.StartGroupId = "";
                         _chatBinder.StartNickname = "";
-     
                     }
                 }
                 
@@ -81,15 +94,14 @@ namespace MileStone3.PresentationLayer
         {
             string nickName = _chatBinder.StartNickname;
             string groupID = _chatBinder.StartGroupId;
-            string password = _password;
 
             // if the user is valid, login
-            if (CheckValidGroupId(groupID) && CheckValidPassword(password))
+            if (CheckValidGroupId(groupID) && (_isPasswordValid))
             {
                 try
                 {
-                    String hashedPassword = _hashing.GetHashString(password + "1337");
-                    if (chatR.Login(nickName, groupID, password))
+                    
+                    if (chatR.Login(nickName, groupID, _hashedPassword))
                     {
 
                         // switch to the next window
@@ -112,11 +124,9 @@ namespace MileStone3.PresentationLayer
                 // the user trying to login isn't registered
                 catch
                 {
-                    if (MessageBox.Show("this user isn't registered", "invalid user", MessageBoxButton.OK
+                    if (MessageBox.Show("This user isn't registered", "invalid user", MessageBoxButton.OK
                                                                                     , MessageBoxImage.Error) == MessageBoxResult.OK)
                     {
-                        _chatBinder.StartNickname = "";
-                        _chatBinder.StartGroupId = "";
                     }
                 } 
             }  
@@ -148,9 +158,13 @@ namespace MileStone3.PresentationLayer
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             PasswordBox pb = sender as PasswordBox;
-            _password = pb.Password;
-
-            pb.Password = "";
+            if (CheckValidPassword(pb.Password))
+            {
+                _hashedPassword = _hashing.GetHashString(pb.Password + "1337");
+                _isPasswordValid = true;
+            }
+            else
+                _isPasswordValid = false;
         }
     }
 }
