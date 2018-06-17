@@ -34,7 +34,7 @@ namespace MileStone3.DataAccessLayer
             _isFirstExecute = true;
 
             // set sql connection
-            _connectionString = $"Data Source={_serverAddress};Initial Catalog={_databaseName}; User ID={_userName};Password={_password}";
+            _connectionString = $"Data Source={_serverAddress};Initial Catalog={_databaseName};User ID={_userName};Password={_password}";
             _recentTimeStamp = new DateTime();
         }
 
