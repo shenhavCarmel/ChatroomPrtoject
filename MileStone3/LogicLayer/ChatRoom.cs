@@ -276,6 +276,7 @@ namespace MileStone3.LogicLayer
             // logger
             log.Info("Messages in chat room where sorted by user preferences");
             return _sorter.runSort(lst);
+        }
         
         public class Sorter
         {

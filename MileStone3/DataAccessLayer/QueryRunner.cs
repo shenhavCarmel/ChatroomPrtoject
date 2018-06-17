@@ -34,7 +34,7 @@ namespace MileStone3.DataAccessLayer
             _isFirstExecute = true;
 
             // set sql connection
-            _connectionString = $"Data Source={_serverAddress};Initial Catalog={_databaseName};User ID={_userName};Password={_password}";
+            _connectionString = $"Data Source={_serverAddress};Initial Catalog={_databaseName}; User ID={_userName};Password={_password}";
             _recentTimeStamp = new DateTime();
         }
 
@@ -91,10 +91,10 @@ namespace MileStone3.DataAccessLayer
         }
         private Query generateMsgQuery()
         {
-            Query qr = new Query("Messages msgs, Users users", "msgs.User_Id = users.Id", true);
+            Query qr = new Query("Messages msgs, Users users", "msgs.User_Id = users.Id AND msgs.SendTime <= CURRENT_TIMESTAMP", true);
             if (!_isFirstExecute)
             {
-                qr.setWhere(qr.getWhere() + " AND msgs.SendTime >= '" + _recentTimeStamp.ToString("yyyy-MM-dd HH:mm:ss") + "'");
+                qr.setWhere(qr.getWhere() + " AND msgs.SendTime <= CURRENT_TIMESTAMP AND msgs.SendTime >= '" + _recentTimeStamp.ToString("yyyy-MM-dd HH:mm:ss") + "'");
                 _recentTimeStamp = DateTime.Now;
             }
             else

@@ -13,7 +13,6 @@ C:\Nofar\ISE182_project23\MileStone3\bin\Debug\log4net.xml
 C:\Nofar\ISE182_project23\MileStone3\bin\Debug\Newtonsoft.Json.xml
 C:\Nofar\ISE182_project23\MileStone3\bin\Debug\nunit.framework.pdb
 C:\Nofar\ISE182_project23\MileStone3\bin\Debug\nunit.framework.xml
-C:\Nofar\ISE182_project23\MileStone3\obj\Debug\MileStone3.csprojResolveAssemblyReference.cache
 C:\Nofar\ISE182_project23\MileStone3\obj\Debug\PresentationLayer\ChatRoomWindow.g.cs
 C:\Nofar\ISE182_project23\MileStone3\obj\Debug\PresentationLayer\FirstWindow.g.cs
 C:\Nofar\ISE182_project23\MileStone3\obj\Debug\App.g.cs
@@ -29,3 +28,5 @@ C:\Nofar\ISE182_project23\MileStone3\obj\Debug\MileStone3.csproj.CoreCompileInpu
 C:\Nofar\ISE182_project23\MileStone3\obj\Debug\MileStone3.csproj.CopyComplete
 C:\Nofar\ISE182_project23\MileStone3\obj\Debug\MileStone3.exe
 C:\Nofar\ISE182_project23\MileStone3\obj\Debug\MileStone3.pdb
+C:\Nofar\ISE182_project23\MileStone3\obj\Debug\PresentationLayer\MsgEditor.g.cs
+C:\Nofar\ISE182_project23\MileStone3\obj\Debug\PresentationLayer\MsgEditor.baml
