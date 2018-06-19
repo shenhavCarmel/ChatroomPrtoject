@@ -46,7 +46,7 @@ namespace MileStone3.LogicLayer
 
         public void SendMessage(string body, QueryRunner queryRunner)
         {
-            Message toSend = new Message(body, this, DateTime.Now, Guid.NewGuid());
+            Message toSend = new Message(body, this, DateTime.UtcNow, Guid.NewGuid());
 
             // update DB
             queryRunner.saveMsgToDB(toSend);
