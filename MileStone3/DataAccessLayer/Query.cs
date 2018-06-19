@@ -22,7 +22,7 @@ namespace MileStone3.DataAccessLayer
             _forMsgs = isForMsgs;
             if (isForMsgs)
             {
-                _orderBy = "SendTime";
+                _orderBy = "SendTime DESC";
             }
             else
             {
