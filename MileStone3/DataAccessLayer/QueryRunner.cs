@@ -95,12 +95,12 @@ namespace MileStone3.DataAccessLayer
             if (!_isFirstExecute)
             {
                 qr.setWhere(qr.getWhere() + " AND msgs.SendTime <= CURRENT_TIMESTAMP AND msgs.SendTime >= '" + _recentTimeStamp.ToString("yyyy-MM-dd HH:mm:ss") + "'");
-                _recentTimeStamp = DateTime.Now;
+                _recentTimeStamp = DateTime.UtcNow;
             }
             else
             {
                 _isFirstExecute = false;
-                _recentTimeStamp = DateTime.Now;
+                _recentTimeStamp = DateTime.UtcNow;
             }
 
             return qr;
